@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'home_widget.dart';
 import 'login_widget.dart';
 
@@ -25,6 +26,14 @@ class MyApp extends StatelessWidget {
       routes: {
         "/homePage": (_) => new Home(),
       },
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('zh','CH'),
+        const Locale('en','US'),
+      ],
     );
   }
 }

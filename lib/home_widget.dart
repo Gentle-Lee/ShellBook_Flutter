@@ -26,16 +26,16 @@ class _HomeState extends State<Home> {
         currentIndex: _currentIndex, // new
         items: [
           BottomNavigationBarItem(
-            icon: new Icon(Icons.home),
-            title: new Text('Home'),
+            icon: new Icon(Icons.redeem),
+            title: new Text('未封装'),
           ),
           BottomNavigationBarItem(
-            icon: new Icon(Icons.mail),
-            title: new Text('Messages'),
+            icon: new Icon(Icons.remove_shopping_cart),
+            title: new Text('未处理'),
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              title: Text('Profile')
+              icon: Icon(Icons.feedback),
+              title: Text('问题订单')
           )
         ],
       ),
