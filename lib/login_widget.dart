@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'home_widget.dart';
 class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -53,8 +54,7 @@ class InputFieldState extends State<InputField>{
   void onLogin(){
     if (_userNameController.text.toString() == 'test' &&
         _userPasswordController.text.toString() == 'admin') {
-      Scaffold.of(context).showSnackBar(
-          new SnackBar(content: new Text("登录成功")));
+      Navigator.pushReplacementNamed(context, "/homePage");
     } else {
       Scaffold.of(context).showSnackBar(
           new SnackBar(content: new Text("登录失败，用户名密码有误")));

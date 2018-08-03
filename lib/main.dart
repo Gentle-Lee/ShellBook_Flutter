@@ -22,6 +22,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: new Login(),
+      routes: {
+        "/homePage": (_) => new Home(),
+      },
     );
   }
 }
