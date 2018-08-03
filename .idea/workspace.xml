@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d68c96c0-8eab-4c35-93e4-84600a405d36" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/images/login_bg.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/lib/placeholder_widget.dart" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/lib/home_widget.dart" afterPath="$PROJECT_DIR$/lib/home_widget.dart" />
       <change beforePath="$PROJECT_DIR$/lib/login_widget.dart" afterPath="$PROJECT_DIR$/lib/login_widget.dart" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" afterPath="$PROJECT_DIR$/lib/main.dart" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" afterPath="$PROJECT_DIR$/pubspec.yaml" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -36,8 +30,8 @@
       <file leaf-file-name="login_widget.dart" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/login_widget.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="22" column="93" lean-forward="false" selection-start-line="22" selection-start-column="93" selection-end-line="22" selection-end-column="93" />
+            <state relative-caret-position="230">
+              <caret line="99" column="22" lean-forward="false" selection-start-line="99" selection-start-column="22" selection-end-line="99" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -56,7 +50,7 @@
       <file leaf-file-name="home_widget.dart" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/home_widget.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
+            <state relative-caret-position="-509">
               <caret line="12" column="36" lean-forward="false" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
@@ -333,16 +327,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/home_widget.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="12" column="36" lean-forward="false" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/main.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-252">
@@ -359,10 +343,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lib/home_widget.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-509">
+          <caret line="12" column="36" lean-forward="false" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/login_widget.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="22" column="93" lean-forward="false" selection-start-line="22" selection-start-column="93" selection-end-line="22" selection-end-column="93" />
+        <state relative-caret-position="230">
+          <caret line="99" column="22" lean-forward="false" selection-start-line="99" selection-start-column="22" selection-end-line="99" selection-end-column="22" />
           <folding />
         </state>
       </provider>

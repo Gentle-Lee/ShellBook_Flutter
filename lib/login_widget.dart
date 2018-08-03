@@ -50,9 +50,21 @@ class InputFieldState extends State<InputField>{
       _userPasswordController.text = "";
     });
   }
+  void onLogin(){
+    if (_userNameController.text.toString() == 'test' &&
+        _userPasswordController.text.toString() == 'admin') {
+      Scaffold.of(context).showSnackBar(
+          new SnackBar(content: new Text("登录成功")));
+    } else {
+      Scaffold.of(context).showSnackBar(
+          new SnackBar(content: new Text("登录失败，用户名密码有误")));
+    }
+    onTextClear();
+  }
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+
     return new Column(
       children: <Widget>[
         new Container(
@@ -74,7 +86,7 @@ class InputFieldState extends State<InputField>{
           child: new TextField(
             controller: _userPasswordController,
             decoration: new InputDecoration(
-                border: InputBorder.none,
+                border: InputBorder.none,//去除inputField下划线
                 contentPadding: const EdgeInsets.symmetric(vertical: 5.0),
                 icon: new Icon(Icons.lock),
                 hintText: "请输入密码",
@@ -83,29 +95,19 @@ class InputFieldState extends State<InputField>{
             obscureText: true,
           ),
         ),
-        new Builder(builder: (BuildContext context) {
-          //监听RaisedButton的点击事件，并做相应的处理
-          return new RaisedButton(
-              onPressed: () {
-                if (_userNameController.text.toString() == 'test' &&
-                    _userPasswordController.text.toString() == 'admin') {
-                  Scaffold.of(context).showSnackBar(
-                      new SnackBar(content: new Text("登录成功")));
-                } else {
-                  Scaffold.of(context).showSnackBar(
-                      new SnackBar(content: new Text("登录失败，用户名密码有误")));
-                }
-                onTextClear();
-              },
-              color: Colors.blue,
-              highlightColor: Colors.lightBlueAccent,
-              disabledColor: Colors.lightBlueAccent,
-              child: new Text(
-                "登录",
-                style: new TextStyle(color: Colors.white),
-              ));
-        })
+        new MaterialButton(
+          height: 40.0,
+          minWidth: 350.0,
+          color: Colors.blueGrey,
+          textColor: Colors.white,
+          child: new Text("登陆",style: new TextStyle(color: Colors.white),),
+          onPressed: (){
+            onLogin();
+          },
+          splashColor: Colors.lightBlueAccent,
+        ),
       ],
     );
+
   }
 }
