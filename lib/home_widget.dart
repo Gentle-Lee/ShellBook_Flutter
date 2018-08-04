@@ -18,7 +18,21 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Flutter App'),
+        title:new Container( child:Text("贝壳淘书"),margin: const EdgeInsets.only(left: 150.0),),
+        actions: <Widget>[
+          new IconButton(
+              icon: new Icon(Icons.search, color: Colors.white ,),
+              onPressed: null
+          ),
+          new IconButton(
+              icon: new Icon(Icons.book, color: Colors.white),
+              onPressed: null
+          ),
+          new IconButton(
+              icon: new Icon(Icons.account_circle, color: Colors.white),
+              onPressed: null
+          ),
+        ],
       ),
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
