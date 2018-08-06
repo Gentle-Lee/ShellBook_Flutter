@@ -1,7 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'dart:convert';
-import '../widgets/package_item_widget.dart';
 
 class UnpackagedPage extends StatefulWidget{
   @override

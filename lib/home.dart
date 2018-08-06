@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'placeholder_widget.dart';
 import 'pages/UnpackagedPage.dart';
 import 'pages/example_one.dart';
+import 'pages/UnfinishPage.dart';
 import 'pages/random.dart';
-import 'pages/test.dart';
 class Home extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -15,7 +14,7 @@ class _HomeState extends State<Home> {
   int _currentIndex = 0;
   final List<StatefulWidget> _children = [
     new UnpackagedPage(),
-    new UnpackagedPage(),
+    new UnfinishPage(),
     new ExampleOne(title: 'Example One'),
   ];
   @override
