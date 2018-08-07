@@ -14,7 +14,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  flutter_webview_plugin: ^0.1.4
   english_words: ^3.1.0
 
 

@@ -6,6 +6,7 @@ import 'pages/random.dart';
 import 'pages/ProblemPage.dart';
 import 'pages/SearchPage.dart';
 import 'pages/AboutPage.dart';
+import 'pages/WebPage.dart';
 class Home extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -38,7 +39,13 @@ class _HomeState extends State<Home> {
           ),
           new IconButton(
               icon: new Icon(Icons.book, color: Colors.white),
-              onPressed: null
+              onPressed: (){
+                Navigator.of(context).push(new MaterialPageRoute(
+                    builder: (context) {
+                      return new WebPage();
+                    }
+                ));
+              }
           ),
           new IconButton(
               icon: new Icon(Icons.account_circle, color: Colors.white),
