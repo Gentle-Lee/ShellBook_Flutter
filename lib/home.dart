@@ -4,6 +4,8 @@ import 'pages/example_one.dart';
 import 'pages/UnfinishPage.dart';
 import 'pages/random.dart';
 import 'pages/ProblemPage.dart';
+import 'pages/SearchPage.dart';
+import 'pages/AboutPage.dart';
 class Home extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -26,7 +28,13 @@ class _HomeState extends State<Home> {
         actions: <Widget>[
           new IconButton(
               icon: new Icon(Icons.search, color: Colors.white ,),
-              onPressed: null
+              onPressed: (){
+                Navigator.of(context).push(new MaterialPageRoute(
+                    builder: (context) {
+                      return new SearchPage();
+                    }
+                ));
+              }
           ),
           new IconButton(
               icon: new Icon(Icons.book, color: Colors.white),
@@ -34,7 +42,13 @@ class _HomeState extends State<Home> {
           ),
           new IconButton(
               icon: new Icon(Icons.account_circle, color: Colors.white),
-              onPressed: null
+              onPressed: (){
+                Navigator.of(context).push(new MaterialPageRoute(
+                    builder: (context) {
+                      return new AboutPage();
+                    }
+                ));
+              }
           ),
         ],
       ),

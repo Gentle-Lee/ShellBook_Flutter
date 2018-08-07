@@ -12,6 +12,9 @@ class _ExampleOneState extends State<ExampleOne> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      appBar: new AppBar(
+        title: new Text(widget.title),
+      ),
       body: ListView.builder(
         itemBuilder: (context, index) {
           return Padding(
@@ -48,8 +51,7 @@ class _ExampleOneState extends State<ExampleOne> {
                       onPressed: () {},
                     ),
                     MaterialButton(
-                      child: new Text('finish'),
-                      onPressed: () {},
+                      child: new Text('finish'), onPressed: () {},
                     ),
                   ],
                 )

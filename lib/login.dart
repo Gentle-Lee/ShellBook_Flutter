@@ -90,7 +90,6 @@ class InputFieldState extends State<InputField>{
                 contentPadding: const EdgeInsets.symmetric(vertical: 5.0),
                 icon: new Icon(Icons.lock),
                 hintText: "请输入密码",
-
             ),
             obscureText: true,
           ),
