@@ -1,6 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'home.dart';
-class Login extends StatelessWidget {
+import 'dart:async';
+
+class Login extends StatefulWidget{
+  @override
+  State<StatefulWidget> createState() {
+    return LoginState();
+  }
+
+}
+
+class LoginState extends State<Login> {
+
+  @override
+  initState() {
+    checkLoginStatus();
+  }
+  checkLoginStatus() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool login = prefs.getBool('Login');
+    if(login){
+    Navigator.pushReplacementNamed(context, "/homePage");
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -34,11 +58,14 @@ class Login extends StatelessWidget {
 }
 
 class InputField extends StatefulWidget{
+
   @override
   State<StatefulWidget> createState() {
     return new InputFieldState();
   }
 }
+
+
 
 class InputFieldState extends State<InputField>{
   //用户名输入框的控制器
@@ -51,15 +78,16 @@ class InputFieldState extends State<InputField>{
       _userPasswordController.text = "";
     });
   }
-  void onLogin(){
+  Future onLogin()async {
     if (_userNameController.text.toString() == 'test' &&
         _userPasswordController.text.toString() == 'admin') {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setBool('Login', true);
       Navigator.pushReplacementNamed(context, "/homePage");
     } else {
       Scaffold.of(context).showSnackBar(
           new SnackBar(content: new Text("登录失败，用户名密码有误")));
     }
-    onTextClear();
   }
   @override
   Widget build(BuildContext context) {

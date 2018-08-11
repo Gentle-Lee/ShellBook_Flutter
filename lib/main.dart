@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'home.dart';
 import 'login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(new MyApp());
 
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         // counter didn't reset back to zero; the application is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: new Home(),
+      home:new Login(),
       routes: {
         "/homePage": (_) => new Home(),
       },
