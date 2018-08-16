@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'home.dart';
 import 'dart:async';
 
@@ -16,13 +15,16 @@ class LoginState extends State<Login> {
 
   @override
   initState() {
+    super.initState();
     checkLoginStatus();
   }
   checkLoginStatus() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool login = prefs.getBool('Login');
     if(login){
-    Navigator.pushReplacementNamed(context, "/homePage");
+      Navigator.pushReplacementNamed(context, "/homePage");
+    }else{
+      Navigator.pushReplacementNamed(context, "/login");
     }
   }
   @override
@@ -92,7 +94,6 @@ class InputFieldState extends State<InputField>{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-
     return new Column(
       children: <Widget>[
         new Container(
