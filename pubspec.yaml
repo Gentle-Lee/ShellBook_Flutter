@@ -2,6 +2,7 @@ name: shellbook_flutter
 description: A new Flutter application.
 
 dependencies:
+  json_annotation: ^0.2.2
   flutter:
     sdk: flutter
   flutter_localizations:
@@ -17,6 +18,8 @@ dev_dependencies:
   flutter_webview_plugin: ^0.1.4
   english_words: ^3.1.0
   shared_preferences: ^0.4.2
+  build_runner: ^0.7.6
+  json_serializable: ^0.3.2
 
 
 

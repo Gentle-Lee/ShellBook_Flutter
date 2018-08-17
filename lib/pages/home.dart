@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'pages/UnpackagedPage.dart';
-import 'pages/example_one.dart';
-import 'pages/UnfinishPage.dart';
-import 'pages/random.dart';
-import 'pages/ProblemPage.dart';
-import 'pages/SearchPage.dart';
-import 'pages/AboutPage.dart';
-import 'pages/WebPage.dart';
+import 'UnpackagedPage.dart';
+import 'UnfinishPage.dart';
+import 'ProblemPage.dart';
+import 'SearchPage.dart';
+import 'AboutPage.dart';
+import 'WebPage.dart';
 class Home extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {

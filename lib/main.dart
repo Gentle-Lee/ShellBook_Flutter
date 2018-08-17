@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'home.dart';
-import 'login.dart';
-import 'splash.dart';
+import 'package:shellbook_flutter/pages/home.dart';
+import 'pages/login.dart';
+import 'package:shellbook_flutter/pages/splash.dart';
 
 void main() => runApp(new MyApp());
 

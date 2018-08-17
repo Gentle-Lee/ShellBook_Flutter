@@ -55,7 +55,9 @@ class SplashState extends State<SplashPage> {
                 ),
               ),
               Center(
-                child: new CircularProgressIndicator(),
+                child: CircularProgressIndicator(
+                  valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
+                ),
               )
             ]
         ),
