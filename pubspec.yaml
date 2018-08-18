@@ -2,7 +2,6 @@ name: shellbook_flutter
 description: A new Flutter application.
 
 dependencies:
-  json_annotation: ^0.2.2
   flutter:
     sdk: flutter
   flutter_localizations:
@@ -11,6 +10,12 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
+  path_provider: "^0.3.1"
+  json_annotation: ^0.2.2
+  sqflite: any
+
+
+
 
 dev_dependencies:
   flutter_test:
