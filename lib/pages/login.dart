@@ -16,16 +16,6 @@ class LoginState extends State<Login> {
   @override
   initState() {
     super.initState();
-    checkLoginStatus();
-  }
-  checkLoginStatus() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool login = prefs.getBool('Login');
-    if(login){
-      Navigator.pushReplacementNamed(context, "/homePage");
-    }else{
-      Navigator.pushReplacementNamed(context, "/login");
-    }
   }
   @override
   Widget build(BuildContext context) {
