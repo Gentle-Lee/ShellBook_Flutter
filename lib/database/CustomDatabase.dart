@@ -36,9 +36,9 @@ class CustomDatabase{
   }
 
   void _onCreate(Database db, int version) async {
-    await db.execute(BookSQL.create);
     await db.execute(OrderSQL.create);
-    await db.execute(OrderToBookSQL.create);
+//    await db.execute(BookSQL.create);
+//    await db.execute(OrderToBookSQL.create);
     print("Database was Created!");
   }
 
@@ -70,6 +70,7 @@ class CustomDatabase{
       print("order added $res");
       return res;
     } catch (e) {
+      print("update order ");
       int res = await updateOrder(order);
       return res;
     }
@@ -103,6 +104,11 @@ class CustomDatabase{
     return res;
   }
 
+  Future<List<Map>> getEmployees() async {
+    var dbClient = await db;
+    List<Map> list = await dbClient.rawQuery('SELECT * FROM bk_order');
+    return list;
+  }
   Future closeDb() async {
     var dbClient = await db;
     dbClient.close();

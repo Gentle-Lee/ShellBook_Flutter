@@ -44,7 +44,7 @@ class HeaderState extends State<Header>{
         ),
         new Column(
           children: <Widget>[
-            new Text(order.nickName + '(' + order.dorm + order.room +')'),
+            new Text(order.nickname + '(' + order.dorm + order.room +')'),
             new Text(order.createDatetime)
           ],
         )

@@ -1,7 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:shellbook_flutter/network.dart';
+import '../model/Order.dart';
+import '../database/CustomDatabase.dart';
+import 'dart:convert';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -11,27 +14,55 @@ class SplashPage extends StatefulWidget {
 
 class SplashState extends State<SplashPage> {
 
+  CustomDatabase database;
   Timer _t;
   @override
   initState() {
     super.initState();
+    database = new CustomDatabase();
+
     Timer _t = new Timer(const Duration(milliseconds: 1500), () {
       try {
-        checkLoginStatus();
+        Future<bool> checkLogin = checkLoginStatus();
+        checkLogin.then((login){
+          print(login);
+//          if(login){
+//            Navigator.pushReplacementNamed(context, "/homePage");
+//          }else{
+//            Navigator.pushReplacementNamed(context, "/login");
+//          }
+        });
       } catch (e) {
 
       }
     });
 
   }
-  checkLoginStatus() async {
+
+  syncDatabase()async{
+    database.initDB();
+    NetWork.instance.get("http://www.mocky.io/v2/5b7bf5bf2e00005400bfe226")
+        .then((res){
+          List jsonA = JSON.decode(res.data.toString());
+          print(jsonA.toString());
+          for(int i = 0 ; i < jsonA.length;i++){
+            Order order =Order.fromJson(jsonA[i]['order']);
+            database.addOrder(order);
+          }
+          database.getEmployees().then((list){
+            print("select");
+            for(int i = 0 ; i< list.length; i ++){
+              print(list[i]['id']);
+              print(list[i]['nickname']);
+            }
+          });
+    });
+  }
+
+  Future<bool> checkLoginStatus() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool login = prefs.getBool('Login');
-    if(login){
-      Navigator.pushReplacementNamed(context, "/homePage");
-    }else{
-      Navigator.pushReplacementNamed(context, "/login");
-    }
+    return login;
   }
 
   @override
@@ -55,9 +86,10 @@ class SplashState extends State<SplashPage> {
                 ),
               ),
               Center(
-                child: CircularProgressIndicator(
-                  valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
-                ),
+                child:  MaterialButton(
+                  child: Text('test sync'),
+                  textColor: Colors.white,
+                  onPressed: syncDatabase,)
               )
             ]
         ),

@@ -3,7 +3,7 @@ import 'package:meta/meta.dart';
 class Order{
   Order({
     this.id,
-    this.nickName,
+    this.nickname,
     this.schoolId,
     this.totalFee,
     this.payFee,
@@ -20,19 +20,19 @@ class Order{
 
   int id,schoolId,deliveryStatus,deliveryMethod;
   double totalFee,payFee;
-  String dorm,room,phone,nickName,headimg,takingNum,createDatetime,lack;
+  String dorm,room,phone,nickname,headimg,takingNum,createDatetime,lack;
 
   Order.fromJson(Map json)
       : id = json['id'],
-        nickName = json['nickName'],
+        nickname = json['nickname'],
         schoolId = json['schoolId'],
-        totalFee = json['totalFee'],
+        totalFee = json['totalFee'].toDouble(),
         dorm = json['dorm'],
         room = json['room'],
         phone = json['phone'],
         deliveryStatus = json['deliveryStatus'],
         headimg = json['headimg'],
-        payFee = json['payFee'],
+        payFee = json['payFee'].toDouble(),
         deliveryMethod = json['deliveryMethod'],
         takingNum = json['takingNum'],
         createDatetime = json['createDatetime'],
@@ -41,7 +41,7 @@ class Order{
   Map<String,dynamic> toJson(){
     var map = Map<String,dynamic>();
     map['id'] = id;
-    map['nickName'] = nickName;
+    map['nickname'] = nickname;
     map['schoolId'] = schoolId;
     map['totalFee'] = totalFee;
     map['dorm'] = dorm;
