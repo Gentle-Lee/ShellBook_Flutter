@@ -45,6 +45,7 @@ flutter:
     - images/login_bg.png
     - images/user_background.jpg
     - images/icon_shellbook.png
+    - assets/books.json
 
   # To add assets to your application, add an assets section, like this:
   # assets:

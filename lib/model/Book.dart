@@ -23,8 +23,8 @@ class Book{
         author = json['author'],
         press = json['press'],
         edition = json['edition'],
-        originalPrice = json['originalPrice'],
-        sellingPrice = json['sellingPrice'];
+        originalPrice = json['originalPrice'].toDouble(),
+        sellingPrice = json['sellingPrice'].toDouble();
 
   Map<String, dynamic> toJson() {
     var map = Map<String, dynamic>();

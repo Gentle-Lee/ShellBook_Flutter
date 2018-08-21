@@ -3,8 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shellbook_flutter/network.dart';
 import '../model/Order.dart';
+import '../model/Book.dart';
+import '../model/OrderToBook.dart';
 import '../database/CustomDatabase.dart';
 import 'dart:convert';
+import 'package:flutter/services.dart' show rootBundle;
+
+Future<String> loadAsset() async {
+  return await rootBundle.loadString('assets/books.json');
+}
 
 class SplashPage extends StatefulWidget {
   @override
@@ -23,46 +30,68 @@ class SplashState extends State<SplashPage> {
 
     Timer _t = new Timer(const Duration(milliseconds: 1500), () {
       try {
-        Future<bool> checkLogin = checkLoginStatus();
-        checkLogin.then((login){
+        checkLoginStatus().then((login){
           print(login);
-//          if(login){
-//            Navigator.pushReplacementNamed(context, "/homePage");
-//          }else{
-//            Navigator.pushReplacementNamed(context, "/login");
-//          }
+          if(!login){
+            database.initDB()
+                .then((database){
+              print("database init compeleted");
+            });
+            loadAsset().then((data)async {
+              List books = JSON.decode(data);
+              print(books.length);
+              for(int i = 0 ; i < books.length; i++){
+                Book book = Book.fromJson(books[i]);
+                await database.addBook(book);
+              }
+            }).whenComplete((){
+              print("import book compeleted");
+//              Navigator.pushReplacementNamed(context, "/login");
+            });
+          }else{
+            Navigator.pushReplacementNamed(context, "/homePage");
+          }
         });
       } catch (e) {
-
+        print(e);
       }
     });
 
   }
 
+
+
   syncDatabase()async{
-    database.initDB();
-    NetWork.instance.get("http://www.mocky.io/v2/5b7bf5bf2e00005400bfe226")
-        .then((res){
-          List jsonA = JSON.decode(res.data.toString());
-          print(jsonA.toString());
-          for(int i = 0 ; i < jsonA.length;i++){
-            Order order =Order.fromJson(jsonA[i]['order']);
-            database.addOrder(order);
-          }
-          database.getEmployees().then((list){
-            print("select");
-            for(int i = 0 ; i< list.length; i ++){
-              print(list[i]['id']);
-              print(list[i]['nickname']);
-            }
-          });
-    });
+//    NetWork.instance.get("http://www.mocky.io/v2/5b7bf5bf2e00005400bfe226")
+//        .then((res){
+//          List jsonA = JSON.decode(res.data.toString());
+//          print(jsonA.toString());
+//          for(int i = 0 ; i < jsonA.length;i++){
+//            Order order =Order.fromJson(jsonA[i]['order']);
+//            database.addOrder(order);
+//            List books = jsonA[i]['books'];
+//            for(int j = 0; j < books.length; j ++){
+//              Book book = Book.fromJson(books[j]);
+//              database.addBook(book);
+//            }
+//          }
+//          database.selectFromOrder().then((list){
+//            print("select");
+//            for(int i = 0 ; i< list.length; i ++){
+//              print(list[i]['id']);
+//              print(list[i]['nickname']);
+//            }
+//          });
+//    });
+      database.selectFromBook().then((list){
+        print(list.length);
+      });
   }
 
   Future<bool> checkLoginStatus() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool login = prefs.getBool('Login');
-    return login;
+    return login == true;
   }
 
   @override

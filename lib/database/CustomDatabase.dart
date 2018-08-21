@@ -37,8 +37,8 @@ class CustomDatabase{
 
   void _onCreate(Database db, int version) async {
     await db.execute(OrderSQL.create);
-//    await db.execute(BookSQL.create);
-//    await db.execute(OrderToBookSQL.create);
+    await db.execute(BookSQL.create);
+    await db.execute(OrderToBookSQL.create);
     print("Database was Created!");
   }
 
@@ -88,7 +88,7 @@ class CustomDatabase{
     var dbClient = await db;
     try {
       int res = await dbClient.insert("bk_book", book.toJson());
-      print("book added $res");
+      print(res);
       return res;
     } catch (e) {
       int res = await updateBook(book);
@@ -100,15 +100,22 @@ class CustomDatabase{
     var dbClient = await db;
     int res = await dbClient.update("bk_book", book.toJson(),
         where: "id = ?", whereArgs: [book.id]);
-    print("book updated $res");
+//    print("book updated $res");
     return res;
   }
 
-  Future<List<Map>> getEmployees() async {
+  Future<List<Map>> selectFromOrder() async {
     var dbClient = await db;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM bk_order');
     return list;
   }
+
+  Future<List<Map>> selectFromBook() async {
+    var dbClient = await db;
+    List<Map> num = await dbClient.rawQuery('SELECT * FROM bk_book');
+    return num;
+  }
+
   Future closeDb() async {
     var dbClient = await db;
     dbClient.close();
