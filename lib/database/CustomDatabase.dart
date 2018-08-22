@@ -132,6 +132,12 @@ class CustomDatabase{
     return num;
   }
 
+  Future<List<Map>> selectFromBookWithOrderId(int id) async {
+    var dbClient = await db;
+    List<Map> num = await dbClient.rawQuery('SELECT * FROM bk_book as A,bk_orderToBook as B where A.id = ? and A.id = B.orderId',[id]);
+    return num;
+  }
+
   Future closeDb() async {
     var dbClient = await db;
     dbClient.close();

@@ -1,10 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import '../model/Order.dart';
 import './Header.dart';
 import '../database/CustomDatabase.dart';
-import '../database/OrderToBookSQL.dart';
-import './UnpackageItem.dart';
-import './BookItem.dart';
+import './BookListView.dart';
+import '../model/BookList.dart';
+import '../model/OrderBook.dart';
 class UnpackageItem extends StatefulWidget{
   Order order;
   CustomDatabase database;
@@ -19,11 +21,21 @@ class UnpackageItem extends StatefulWidget{
 class UnpackageItemStage extends State<UnpackageItem>{
   Order order;
   CustomDatabase database;
+  List<OrderBook> bookList;
   @override
   void initState() {
     order = widget.order;
     database = widget.database;
+    loadBooksList().then((data){
+      setState(() {
+        bookList = data;
+      });
+    });
     super.initState();
+  }
+  Future<List<OrderBook>> loadBooksList()async {
+    List<OrderBook> list = BookList.fromJson(await database.selectFromBookWithOrderId(order.id)).list;
+    return list;
   }
   @override
   Widget build(BuildContext context) {
@@ -37,7 +49,7 @@ class UnpackageItemStage extends State<UnpackageItem>{
               height: 8.0,
               color: Colors.blueGrey,
             ),
-            //BookItem(),
+            BookListView(bookList),
             Row(
               children: <Widget>[
                 Expanded(

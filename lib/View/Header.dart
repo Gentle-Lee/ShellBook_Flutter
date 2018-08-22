@@ -35,7 +35,7 @@ class HeaderState extends State<Header>{
             shape: BoxShape.circle,
             color: const Color(0xFFECECEC),
             image: new DecorationImage(
-                image: new NetworkImage("http://beikebook.com" + order.headimg), fit: BoxFit.cover),
+                image: new NetworkImage(order.headimg), fit: BoxFit.cover),
             border: new Border.all(
               color: const Color(0xFFECECEC),
               width: 2.0,

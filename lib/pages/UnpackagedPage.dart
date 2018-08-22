@@ -6,7 +6,7 @@ import '../model/Order.dart';
 import '../model/OrderToBook.dart';
 import '../model/Book.dart';
 import '../View/UnpackageItem.dart';
-import 'package:http/http.dart' as http;
+import '../model/OrderList.dart';
 class UnpackagedPage extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
@@ -15,14 +15,16 @@ class UnpackagedPage extends StatefulWidget{
 }
 
 class UnpackagedPageState extends State<UnpackagedPage>{
-  List<Order> _list;
-  CustomDatabase db;
+  List<Order> _list = List();
+  CustomDatabase db = new CustomDatabase();
   var curPage = 1;
   ScrollController _scrollController = new ScrollController();
   bool isPerformingRequest = false;
   @override
   void initState() {
     super.initState();
+    print("init state");
+    _getMoreData();
     _scrollController.addListener(() {
       if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
         _getMoreData();
@@ -34,15 +36,17 @@ class UnpackagedPageState extends State<UnpackagedPage>{
     return RefreshIndicator(
       onRefresh: _refresh,
       backgroundColor: Colors.blue,
-      child: ListView.builder(
-        itemBuilder: (context, index) {
-          if (index == _list.length) {
-            return _buildProgressIndicator();
-          }
-          return UnpackageItem(_list[index],db);
-        },
-        itemCount: _list.length,
-        controller: _scrollController,
+      child: Container(
+        child: ListView.builder(
+          itemBuilder: (context, index) {
+            if (index == _list.length) {
+              return _buildProgressIndicator();
+            }
+            return UnpackageItem(_list[index],db);
+          },
+          itemCount: _list == null ? 0 : _list.length,
+          controller: _scrollController,
+        ),
       ),
     );
   }
@@ -61,9 +65,9 @@ class UnpackagedPageState extends State<UnpackagedPage>{
   _getMoreData() async {
     if (!isPerformingRequest) {
       setState(() => isPerformingRequest = true);
-//      List<int> newEntries = await fakeRequest(items.length, items.length + 10);
+      List<Map> mList = await db.selectFromOrder();
+      _list = OrderList.fromJson(mList).list;
       setState(() {
-//        items.addAll(newEntries);
         isPerformingRequest = false;
       });
     }

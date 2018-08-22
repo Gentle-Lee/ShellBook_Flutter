@@ -1,3 +1,4 @@
+import '../model/Book.dart';
 class OrderToBook{
   int id,orderId,bookId,amount;
   OrderToBook({

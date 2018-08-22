@@ -24,21 +24,21 @@ class SplashState extends State<SplashPage> {
     super.initState();
     database = new CustomDatabase();
 
-    Timer _t = new Timer(const Duration(milliseconds: 1500), () {
-      try {
-        checkLoginStatus().then((login){
-          print(login);
-        });
-      } catch (e) {
-        print(e);
-      }
+    _t = new Timer(const Duration(milliseconds: 5000), () {
+      checkLoginStatus().then((login)async {
+        if(login){
+          Navigator.pushReplacementNamed(context, "/homePage");
+        }else{
+          Navigator.pushReplacementNamed(context, "/login");
+        }
+      });
     });
-
+    syncDatabase();
   }
 
 
 
-  syncDatabase()async{
+  Future syncDatabase()async{
     NetWork.instance.get("http://www.mocky.io/v2/5b7cd57d3300002a004a001d")
         .then((res)async {
           List jsonA = JSON.decode(res.data.toString());
@@ -53,19 +53,6 @@ class SplashState extends State<SplashPage> {
             }
           }
     });
-    database.selectFromOrder().then((list){
-      print("select");
-      print(list.length);
-      for(int i = 0 ; i< list.length; i ++){
-        print(list[i]['id']);
-        print(list[i]['nickname']);
-      }
-    });
-//    database.selectFromBook().then((list){
-//      for(int i = 0 ; i < list.length ; i ++){
-//        print(list[i]['title']);
-//      }
-//    });
   }
 
   Future<bool> checkLoginStatus() async {
@@ -76,8 +63,8 @@ class SplashState extends State<SplashPage> {
 
   @override
   void dispose() {
-    _t.cancel();
     super.dispose();
+    _t.cancel();
   }
 
   @override
@@ -95,10 +82,9 @@ class SplashState extends State<SplashPage> {
                 ),
               ),
               Center(
-                child:  MaterialButton(
-                  child: Text('test sync'),
-                  textColor: Colors.white,
-                  onPressed: syncDatabase,)
+                child:  new CircularProgressIndicator(
+                  backgroundColor: Colors.white,
+                )
               )
             ]
         ),
