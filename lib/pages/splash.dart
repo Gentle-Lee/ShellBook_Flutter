@@ -7,11 +7,7 @@ import '../model/Book.dart';
 import '../model/OrderToBook.dart';
 import '../database/CustomDatabase.dart';
 import 'dart:convert';
-import 'package:flutter/services.dart' show rootBundle;
 
-Future<String> loadAsset() async {
-  return await rootBundle.loadString('assets/books.json');
-}
 
 class SplashPage extends StatefulWidget {
   @override
@@ -32,25 +28,6 @@ class SplashState extends State<SplashPage> {
       try {
         checkLoginStatus().then((login){
           print(login);
-          if(!login){
-            database.initDB()
-                .then((database){
-              print("database init compeleted");
-            });
-            loadAsset().then((data)async {
-              List books = JSON.decode(data);
-              print(books.length);
-              for(int i = 0 ; i < books.length; i++){
-                Book book = Book.fromJson(books[i]);
-                await database.addBook(book);
-              }
-            }).whenComplete((){
-              print("import book compeleted");
-//              Navigator.pushReplacementNamed(context, "/login");
-            });
-          }else{
-            Navigator.pushReplacementNamed(context, "/homePage");
-          }
         });
       } catch (e) {
         print(e);
@@ -62,30 +39,33 @@ class SplashState extends State<SplashPage> {
 
 
   syncDatabase()async{
-//    NetWork.instance.get("http://www.mocky.io/v2/5b7bf5bf2e00005400bfe226")
-//        .then((res){
-//          List jsonA = JSON.decode(res.data.toString());
-//          print(jsonA.toString());
-//          for(int i = 0 ; i < jsonA.length;i++){
-//            Order order =Order.fromJson(jsonA[i]['order']);
-//            database.addOrder(order);
-//            List books = jsonA[i]['books'];
-//            for(int j = 0; j < books.length; j ++){
-//              Book book = Book.fromJson(books[j]);
-//              database.addBook(book);
-//            }
-//          }
-//          database.selectFromOrder().then((list){
-//            print("select");
-//            for(int i = 0 ; i< list.length; i ++){
-//              print(list[i]['id']);
-//              print(list[i]['nickname']);
-//            }
-//          });
+    NetWork.instance.get("http://www.mocky.io/v2/5b7cd57d3300002a004a001d")
+        .then((res)async {
+          List jsonA = JSON.decode(res.data.toString());
+          print(jsonA.toString());
+          for(int i = 0 ; i < jsonA.length;i++){
+            Order order =Order.fromJson(jsonA[i]['order']);
+            await database.addOrder(order);
+            List books = jsonA[i]['map'];
+            for(int j = 0; j < books.length; j ++){
+              OrderToBook orderToBook = OrderToBook.fromJson(books[j]);
+              await database.addOrderToBook(orderToBook);
+            }
+          }
+    });
+    database.selectFromOrder().then((list){
+      print("select");
+      print(list.length);
+      for(int i = 0 ; i< list.length; i ++){
+        print(list[i]['id']);
+        print(list[i]['nickname']);
+      }
+    });
+//    database.selectFromBook().then((list){
+//      for(int i = 0 ; i < list.length ; i ++){
+//        print(list[i]['title']);
+//      }
 //    });
-      database.selectFromBook().then((list){
-        print(list.length);
-      });
   }
 
   Future<bool> checkLoginStatus() async {
