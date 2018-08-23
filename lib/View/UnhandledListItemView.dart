@@ -41,7 +41,7 @@ class UnhandledListItemState extends State<UnhandledListItem>{
   Widget build(BuildContext context) {
     return Card(
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 10.0),
+        padding: EdgeInsets.all(8.0),
         child: Column(
           children: <Widget>[
             Header(order),
