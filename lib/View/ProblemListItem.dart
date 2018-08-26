@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import '../model/Order.dart';
 import '../database/CustomDatabase.dart';
 import '../View/Header.dart';
-import './BookListView.dart';
 import '../model/BookList.dart';
 import '../model/OrderBook.dart';
+import '../View/PlainBookListVIew.dart';
 
 class ProblemListItem extends StatefulWidget{
   Order order;
@@ -52,7 +52,7 @@ class ProblemListItemState extends State<ProblemListItem>{
               height: 8.0,
               color: Colors.blueGrey,
             ),
-            BookListView(bookList),
+            PlainBookList(bookList),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
