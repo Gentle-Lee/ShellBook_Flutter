@@ -2,7 +2,7 @@ class Book{
   Book({
     this.id,
     this.isbn,
-    this.compressedCover,
+    this.cover,
     this.title,
     this.author,
     this.press,
@@ -12,13 +12,13 @@ class Book{
   });
 
   int id;
-  String isbn,compressedCover,title,author,press,edition;
+  String isbn,cover,title,author,press,edition;
   double originalPrice,sellingPrice;
 
   Book.fromJson(Map json)
       :id = json['id'],
         isbn = json['isbn'],
-        compressedCover = json['compressedCover'],
+        cover = json['cover'],
         title = json['title'],
         author = json['author'],
         press = json['press'],
@@ -30,7 +30,7 @@ class Book{
     var map = Map<String, dynamic>();
     map['id'] = id;
     map['isbn'] = isbn;
-    map['compressedCover'] = compressedCover;
+    map['cover'] = cover;
     map['title'] = title;
     map['author'] = author;
     map['press'] = press;

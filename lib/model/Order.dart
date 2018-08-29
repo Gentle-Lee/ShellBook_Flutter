@@ -15,10 +15,11 @@ class Order{
     this.deliveryMethod,
     this.takingNum,
     this.createDatetime,
-    this.lack
+    this.lack,
+    this.packed
   });
 
-  int id,schoolId,deliveryStatus,deliveryMethod;
+  int id,schoolId,deliveryStatus,deliveryMethod,packed;
   double totalFee,payFee;
   String dorm,room,phone,nickname,headimg,takingNum,createDatetime,lack;
 
@@ -36,7 +37,8 @@ class Order{
         deliveryMethod = json['deliveryMethod'],
         takingNum = json['takingNum'],
         createDatetime = json['createDatetime'],
-        lack = json['lack'];
+        lack = json['lack'],
+        packed = json['packed'];
 
   Map<String,dynamic> toJson(){
     var map = Map<String,dynamic>();
@@ -53,6 +55,7 @@ class Order{
     map['takingNum'] = takingNum;
     map['createDatetime'] = createDatetime;
     map['lack'] = lack;
+    map['packed'] = packed;
     return map;
   }
 

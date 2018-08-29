@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../model/OrderBook.dart';
+import 'package:shellbook_flutter/network.dart';
 class BookListView extends StatelessWidget{
   List<OrderBook> list;
   BookListView(this.list);
@@ -18,7 +19,7 @@ class BookListView extends StatelessWidget{
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       Expanded(
-                        child: Image.network("http://www.beikebook.com"+list[index].book.compressedCover ),
+                        child: Image.network(NetWork.IMAGE_URL_PREFIX+list[index].book.cover ),
                         flex: 2,
                       ),
                       Expanded(

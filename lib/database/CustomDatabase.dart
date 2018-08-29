@@ -30,17 +30,17 @@ class CustomDatabase{
           var databasesPath = await getDatabasesPath();
           var path = join(databasesPath, "shellbook.db");
           var file = new File(path);
-
           // check if file exists
           if (!await file.exists()) {
             // Copy from asset
+            print("copy from file");
             ByteData data = await rootBundle.load(join("assets", "main.db"));
-            List<int> bytes =
-            data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+            List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
             await new File(path).writeAsBytes(bytes);
           }
           // open the database
           _db = await openDatabase(path,readOnly: false);
+          print("open database");
         }
       });
     }
@@ -63,7 +63,7 @@ class CustomDatabase{
     var dbClient = await db;
     try {
       int res = await dbClient.insert("bk_orderToBook", orderToBook.toJson());
-      print("orderToBook added $res");
+//      print("orderToBook added $res");
       return res;
     } catch (e) {
       int res = await updateOrderToBook(orderToBook);
@@ -75,19 +75,21 @@ class CustomDatabase{
     var dbClient = await db;
     int res = await dbClient.update("bk_orderToBook", orderToBook.toJson(),
         where: "id = ?", whereArgs: [orderToBook.id]);
-    print("orderToBook updated $res");
+//    print("orderToBook updated $res");
     return res;
   }
 
   Future<int> addOrder(Order order) async {
     var dbClient = await db;
     try {
+      print(order.id);
       int res = await dbClient.insert("bk_order", order.toJson());
-      print("order added $res");
+//      print("order added $res");
+//      print(res);
       return res;
     } catch (e) {
       int res = await updateOrder(order);
-      print("update order $res ");
+//      print("update order $res ");
       return res;
     }
   }
@@ -96,7 +98,7 @@ class CustomDatabase{
     var dbClient = await db;
     int res = await dbClient.update("bk_order", order.toJson(),
         where: "id = ?", whereArgs: [order.id]);
-    print("order updated $res");
+//    print("order updated $res");
     return res;
   }
 
@@ -104,7 +106,7 @@ class CustomDatabase{
     var dbClient = await db;
     try {
       int res = await dbClient.insert("bk_book", book.toJson());
-      print(res);
+//      print(res);
       return res;
     } catch (e) {
       int res = await updateBook(book);
@@ -126,6 +128,31 @@ class CustomDatabase{
     return list;
   }
 
+  Future<List<Map>> selectUnpackOrder() async {
+    var dbClient = await db;
+    List<Map> list = await dbClient.rawQuery('SELECT * FROM bk_order where packed = 0');
+    return list;
+  }
+
+  //delivery = 1 > 配送   = 0 > 自取
+  Future<List<Map>> selectUnSendOrder() async {
+    var dbClient = await db;
+    List<Map> list = await dbClient.rawQuery('SELECT * FROM bk_order where packed = 1 and deliveryStatus = 0 and deliveryMethod = 1 and lack = null');
+    return list;
+  }
+
+  Future<List<Map>> selectUnGetOrder() async {
+    var dbClient = await db;
+    List<Map> list = await dbClient.rawQuery('SELECT * FROM bk_order where packed = 1 and deliveryStatus = 0 and deliveryMethod = 0 and lack = null');
+    return list;
+  }
+
+  Future<List<Map>> selectProblemOrder() async {
+    var dbClient = await db;
+    List<Map> list = await dbClient.rawQuery('SELECT * FROM bk_order where lack != null');
+    return list;
+  }
+
   Future<List<Map>> selectFromBook() async {
     var dbClient = await db;
     List<Map> num = await dbClient.rawQuery('SELECT * FROM bk_book');
@@ -134,7 +161,7 @@ class CustomDatabase{
 
   Future<List<Map>> selectFromBookWithOrderId(int id) async {
     var dbClient = await db;
-    List<Map> num = await dbClient.rawQuery('SELECT * FROM bk_book as A,bk_orderToBook as B where A.id = ? and A.id = B.orderId',[id]);
+    List<Map> num = await dbClient.rawQuery('SELECT * FROM bk_book as A,bk_orderToBook as B where B.orderId = ? and A.id = B.bookId',[id]);
     return num;
   }
 

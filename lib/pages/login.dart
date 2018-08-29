@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'home.dart';
 import 'dart:async';
-
+import 'package:shellbook_flutter/network.dart';
+import 'dart:convert';
 class Login extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
@@ -71,15 +71,23 @@ class InputFieldState extends State<InputField>{
     });
   }
   Future onLogin()async {
-    if (_userNameController.text.toString() == 'test' &&
-        _userPasswordController.text.toString() == 'admin') {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setBool('Login', true);
-      Navigator.pushReplacementNamed(context, "/homePage");
-    } else {
-      Scaffold.of(context).showSnackBar(
-          new SnackBar(content: new Text("登录失败，用户名密码有误")));
-    }
+    var params = {
+      "account":_userNameController.text.toString(),
+      "password":  _userPasswordController.text.toString()
+    };
+    print(params);
+    NetWork.instance.post(NetWork.LOGIN,data: params)
+    .then((res)async {
+      var response = JSON.decode(res.data.toString());
+      if(response['msg'] == 'success'){
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setBool('Login', true);
+        Navigator.pushReplacementNamed(context, "/homePage");
+      }else{
+        Scaffold.of(context).showSnackBar(
+            new SnackBar(content: new Text("登录失败，用户名密码有误")));
+      }
+    });
   }
   @override
   Widget build(BuildContext context) {

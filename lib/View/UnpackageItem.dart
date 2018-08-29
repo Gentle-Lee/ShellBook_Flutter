@@ -27,9 +27,11 @@ class UnpackageItemStage extends State<UnpackageItem>{
     order = widget.order;
     database = widget.database;
     loadBooksList().then((data){
-      setState(() {
-        bookList = data;
-      });
+      if(this.mounted){
+        setState(() {
+          bookList = data;
+        });
+      }
     });
     super.initState();
   }

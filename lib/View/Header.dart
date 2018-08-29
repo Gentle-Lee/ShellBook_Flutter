@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../model/Order.dart';
+import 'package:shellbook_flutter/network.dart';
 
 class Header extends StatefulWidget{
   Header(this.order);
@@ -17,10 +18,19 @@ class HeaderState extends State<Header>{
 
   Order order;
   String status = "";
+  String headimg = "";
   @override
   void initState() {
     super.initState();
     order = widget.order;
+    if(order.headimg == null){
+      headimg = NetWork.USER_URL_PREFIX +'/images/user/default.png';
+    }
+    else if(!order.headimg.contains('http')){
+      headimg = NetWork.USER_URL_PREFIX + order.headimg;
+    }else{
+      headimg = order.headimg;
+    }
     if(order.deliveryStatus == 0){
       status = "";
     }else{
@@ -32,21 +42,13 @@ class HeaderState extends State<Header>{
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: new Container(
-        width: 20.0,
-        height: 20.0,
-        decoration: new BoxDecoration(
-          shape: BoxShape.circle,
-          color: const Color(0xFFECECEC),
-          image: new DecorationImage(
-              image: new NetworkImage(order.headimg), fit: BoxFit.cover),
-          border: new Border.all(
-            color: const Color(0xFFECECEC),
-            width: 2.0,
-          ),
-        ),
+      leading: FadeInImage.assetNetwork(
+        width: 30.0,
+        height: 30.0,
+        placeholder: 'images/icon_shellbook.png',
+        image: headimg,
       ),
-      title: new Text(order.nickname),
+      title: new Text(order.nickname == null ? "null" : order.nickname),
       subtitle: new Text(order.createDatetime),
       trailing: new Text(status),
     );
