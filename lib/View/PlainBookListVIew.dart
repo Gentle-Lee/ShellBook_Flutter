@@ -25,10 +25,10 @@ class PlainBookList extends StatelessWidget{
                     ),
                   ]
               ),
-              Divider(
-                height: 4.0,
-                color: Colors.grey,
-              )
+//              Divider(
+//                height: 4.0,
+//                color: Colors.grey,
+//              )
             ],
           ),
         );

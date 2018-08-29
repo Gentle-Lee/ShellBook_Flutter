@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import '../model/Order.dart';
+import 'package:shellbook_flutter/View/BlankView.dart';
 import '../View/Header.dart';
-import '../View/PlainBookListVIew.dart';
-import '../model/OrderBook.dart';
+import 'package:shellbook_flutter/network.dart';
+import 'dart:convert';
+import '../database/CustomDatabase.dart ';
+import '../model/SearchOrderList.dart';
+import '../model/SearchOrder.dart';
+import '../View/SearchPalnBookListView.dart';
 class SearchPage extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
@@ -12,8 +16,9 @@ class SearchPage extends StatefulWidget{
 }
 
 class SearchPageState extends State<SearchPage>{
-  List<Order> _list;
-  List<OrderBook> orderBookList;
+  List<SearchOrder> _list = new List();
+  CustomDatabase database = new CustomDatabase();
+  final TextEditingController _controller = new TextEditingController();
   Widget searchInput() {
     return new Container(
       child: new Row(
@@ -35,8 +40,13 @@ class SearchPageState extends State<SearchPage>{
                   hintText: "输入手机号码/宿舍/微信名",
                   hintStyle: new TextStyle(color: Colors.white)
               ),
-              onSubmitted: requestList(),
+              controller: _controller,
             ),
+          ),
+          FlatButton(
+            textColor: Colors.white,
+            child: new Text("搜索",style: new TextStyle(color: Colors.white),),
+            onPressed: requestList,
           )
         ],
       ),
@@ -54,28 +64,37 @@ class SearchPageState extends State<SearchPage>{
           title: searchInput(),
         ),
         body: Container(
-          child: ListView.builder(
+          child: _list == null || _list.length == 0 ? BlankView() : ListView.builder(
             itemBuilder: (context, index) {
-              return Column(
-                children: <Widget>[
-                  Header(_list[index]),
-                  PlainBookList(orderBookList),
-                  _list[index].lack == null ? Container() : Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: const Text('订单问题 : '),
-                          flex: 2,
+              return Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: <Widget>[
+                      Header(_list[index].order),
+                      Divider(
+                        height: 8.0,
+                        color: Colors.blueGrey,
+                      ),
+                      SearchBookList(_list[index].mapList,database),
+                      _list[index].order.lack == null ? Container() : Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: const Text('订单问题 : '),
+                              flex: 2,
+                            ),
+                            Expanded(
+                              child: Text(_list[index].order.lack == null ? "无数据" : _list[index].order.lack),
+                              flex: 8,
+                            )
+                          ],
                         ),
-                        Expanded(
-                          child: Text(_list[index].lack == null ? "无数据" : _list[index].lack),
-                          flex: 8,
-                        )
-                      ],
-                    ),
-                  )
-                ],
+                      )
+                    ],
+                  ),
+                ),
               );
             },
             itemCount: _list == null ? 0 : _list.length,
@@ -85,6 +104,28 @@ class SearchPageState extends State<SearchPage>{
     );
   }
 
-  requestList(){}
+  requestList(){
+    print('text =   '+_controller.text);
+    if(_list != null && _list.length!=0){
+      if(this.mounted){
+        setState(() {
+          _list.clear();
+        });
+      }
+    }
+    NetWork.instance.get(NetWork.SEARCH_ORDER,data: {'keyword ':_controller.text})
+        .then((res){
+          List jsonList = JSON.decode(res.data.toString());
+          print(jsonList);
+          if(this.mounted){
+            setState(() {
+              _list = SearchOrderList.fromJson(jsonList).list;
+              print('_list length = ' + _list.length.toString());
+            });
+          }
+    });
+  }
+
+
 
 }

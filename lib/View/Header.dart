@@ -31,10 +31,12 @@ class HeaderState extends State<Header>{
     }else{
       headimg = order.headimg;
     }
-    if(order.deliveryStatus == 0){
-      status = "";
-    }else{
-      status = "unpackaged";
+    if(order.packed ==1){
+      if(order.deliveryStatus == 0 && order.deliveryMethod == 0){
+        status = "未配送";
+      }else{
+        status = "未自取";
+      }
     }
   }
 
