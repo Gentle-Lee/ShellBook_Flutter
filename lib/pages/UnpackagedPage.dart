@@ -8,6 +8,8 @@ import '../model/OrderToBook.dart';
 import '../model/Book.dart';
 import '../View/UnpackageItem.dart';
 import '../model/OrderList.dart';
+import 'package:shellbook_flutter/network.dart';
+import 'dart:convert';
 class UnpackagedPage extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
@@ -43,7 +45,7 @@ class UnpackagedPageState extends State<UnpackagedPage>{
             if (index == _list.length) {
               return _buildProgressIndicator();
             }
-            return UnpackageItem(_list[index],db);
+            return UnpackageItem(index,_list[index],db,confirmfunc: confirmOrder,);
           },
           itemCount: _list == null ? 0 : _list.length,
           controller: _scrollController,
@@ -66,12 +68,32 @@ class UnpackagedPageState extends State<UnpackagedPage>{
   _getMoreData() async {
     if (!isPerformingRequest) {
       setState(() => isPerformingRequest = true);
-      List<Map> mList = await db.selectFromOrder();
+      List<Map> mList = await db.selectUnpackOrder();
       _list = OrderList.fromJson(mList).list;
       setState(() {
         isPerformingRequest = false;
       });
     }
+  }
+  confirmOrder(int orderId,int index){
+    NetWork.instance.post(NetWork.COMFIRM_ORDER,data:{'orderId':orderId} )
+        .then((res){
+          var msg = JSON.decode(res.data.toString());
+          if(msg['msg'] == 'success'){
+            Scaffold.of(context).showSnackBar(
+                new SnackBar(content: new Text("确认装袋成功")));
+            if(this.mounted){
+              setState(() async {
+                _list[index].packed = 1;
+                await db.updateOrderPacked(_list[index]);
+                _list.removeAt(index);
+              });
+            }
+          }else{
+            Scaffold.of(context).showSnackBar(
+                new SnackBar(content: new Text("确认装袋失败,请稍后再试")));
+          }
+    });
   }
 
   Widget _buildProgressIndicator() {

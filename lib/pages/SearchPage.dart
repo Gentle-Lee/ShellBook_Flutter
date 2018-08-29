@@ -105,7 +105,7 @@ class SearchPageState extends State<SearchPage>{
   }
 
   requestList(){
-    print('text =   '+_controller.text);
+    print('text ='+_controller.text);
     if(_list != null && _list.length!=0){
       if(this.mounted){
         setState(() {
@@ -113,7 +113,7 @@ class SearchPageState extends State<SearchPage>{
         });
       }
     }
-    NetWork.instance.get(NetWork.SEARCH_ORDER,data: {'keyword ':_controller.text})
+    NetWork.getRes(NetWork.SEARCH_ORDER+ _controller.text)
         .then((res){
           List jsonList = JSON.decode(res.data.toString());
           print(jsonList);

@@ -8,9 +8,11 @@ import './BookListView.dart';
 import '../model/BookList.dart';
 import '../model/OrderBook.dart';
 class UnpackageItem extends StatefulWidget{
+  int index;
   Order order;
   CustomDatabase database;
-  UnpackageItem(this.order,this.database);
+  var confirmfunc;
+  UnpackageItem(this.index,this.order,this.database,{this.confirmfunc});
   @override
   State<StatefulWidget> createState() {
     return UnpackageItemStage();
@@ -69,11 +71,14 @@ class UnpackageItemStage extends State<UnpackageItem>{
                   flex: 6,
                 ),
                 Expanded(
-                  child: MaterialButton(
-                    color: Colors.blue,
-                    textColor: Colors.white,
-                    child: new Text("finish",style: new TextStyle(color: Colors.white),),
-                    onPressed: () {},
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: MaterialButton(
+                      color: Colors.blue,
+                      textColor: Colors.white,
+                      child: new Text("finish",style: new TextStyle(color: Colors.white),),
+                      onPressed: pressConfirm,
+                    ),
                   ),
                   flex: 4,
                 ),
@@ -85,5 +90,11 @@ class UnpackageItemStage extends State<UnpackageItem>{
       ),
     );
   }
+
+  pressConfirm(){
+    widget.confirmfunc(order.id,widget.index);
+  }
+
+
 
 }

@@ -213,6 +213,17 @@ class CustomDatabase{
     return num;
   }
 
+  Future<int> updateOrderPacked(Order order)async {
+    var dbClient = await db;
+    int res;
+    try{
+      res = await dbClient.update("bk_order", order.toJson(),
+          where: "id = ?", whereArgs: [order.id]);
+    }catch(e){
+      print(e);
+    }
+    return res;
+  }
 
 
   Future closeDb() async {
