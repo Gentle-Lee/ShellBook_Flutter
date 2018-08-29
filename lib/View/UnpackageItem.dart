@@ -32,10 +32,6 @@ class UnpackageItemStage extends State<UnpackageItem>{
       if(this.mounted){
         setState(() {
           bookList = data;
-          if(order.nickname != null && order.nickname.contains('泽鹏')){
-            print(order.id);
-            print(bookList);
-          }
         });
       }
     });

@@ -19,7 +19,7 @@ class BookListView extends StatelessWidget{
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       Expanded(
-                        child: Image.network(NetWork.IMAGE_URL_PREFIX+list[index].book.cover ),
+                        child: Image.network(list[index].book.cover.contains('http') == true ?list[index].book.cover : NetWork.IMAGE_URL_PREFIX+list[index].book.cover ),
                         flex: 2,
                       ),
                       Expanded(

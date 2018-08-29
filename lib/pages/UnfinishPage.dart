@@ -115,10 +115,12 @@ class UnfinishPageState extends State<UnfinishPage> with SingleTickerProviderSta
         mList = await db.selectUnfinishedOrder();
         break;
       case 1:
-        mList = await db.selectOrderByDeliveryMethod(0);
+        // 1 => 配送
+        mList = await db.selectOrderByDeliveryMethod(1);
         break;
       case 2:
-        mList = await  db.selectOrderByDeliveryMethod(1);
+        //0 => 自取
+        mList = await  db.selectOrderByDeliveryMethod(0);
         break;
     }
     if(this.mounted){
