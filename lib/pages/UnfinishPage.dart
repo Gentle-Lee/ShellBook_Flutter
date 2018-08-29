@@ -5,6 +5,8 @@ import '../database/CustomDatabase.dart';
 import '../model/Order.dart';
 import '../model/OrderList.dart';
 import '../View/BlankView.dart';
+import 'dart:convert';
+import 'package:shellbook_flutter/network.dart';
 class UnfinishPage extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
@@ -24,6 +26,7 @@ class UnfinishPageState extends State<UnfinishPage> with SingleTickerProviderSta
   void initState() {
     super.initState();
     loadOrder();
+    getUnFinishOrder();
     _tabController = new TabController(vsync: this, length: 3);
     _tabController.addListener(loadOrder);
     _scrollController.addListener(() {
@@ -86,8 +89,12 @@ class UnfinishPageState extends State<UnfinishPage> with SingleTickerProviderSta
   }
 
   Future<Null> _refresh() async {
-    _list.clear();
-//    await _loadFirstListData();
+    setState(() {
+      _list.clear();
+    });
+    await getUnFinishOrder();
+    await NetWork.syncDatabase();
+    await loadOrder();
     return;
   }
 
@@ -106,6 +113,26 @@ class UnfinishPageState extends State<UnfinishPage> with SingleTickerProviderSta
         isPerformingRequest = false;
       });
     }
+  }
+
+  getUnFinishOrder()async {
+    List list = await db.selectUnfinishedOrder();
+    List orderIdList = new List();
+    list.forEach((item)=>orderIdList.add({'id':item['id']}));
+    print(orderIdList);
+    print(JSON.encode(orderIdList));
+    var params = {
+      'orderList':orderIdList
+    };
+    print(params);
+    NetWork.instance.post(NetWork.SYNC_FINISHED_ORDER,data: params).then((res)async {
+      print(res.data.toString());
+      List jsonA = JSON.decode(res.data.toString());
+      for(int i = 0 ; i < jsonA.length;i++){
+        Order order =Order.fromJson(jsonA[i]);
+        await db.updateOrder(order);
+      }
+    });
   }
   
   loadOrder()async {

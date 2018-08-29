@@ -1,8 +1,10 @@
 import 'dart:async';
-
+import 'dart:io';
 import 'package:dio/dio.dart';
 import 'dart:convert';
-
+import 'database/CustomDatabase.dart';
+import 'model/Order.dart';
+import 'model/OrderToBook.dart';
 class NetWork{
   static const String BASE_URL = "https://www.beikebook.com";
   static const String ALL_ORDER = BASE_URL + "/all-order";
@@ -11,9 +13,12 @@ class NetWork{
   static const String LOGIN = BASE_URL + '/login';
   static const String USER_URL_PREFIX = 'http://m.beikebook.com';
   static const String IMAGE_URL_PREFIX = 'http://beikebook.com';
+  static const String SYNC_FINISHED_ORDER = BASE_URL + '/syncFinishedOrder';
+  static final CustomDatabase database = new CustomDatabase();
   static Dio _dio;
   static Options options = new Options(
     baseUrl:BASE_URL,
+    contentType:  ContentType.parse("application/x-www-form-urlencoded"),
     connectTimeout:5000,
     receiveTimeout:3000
   );
@@ -33,4 +38,24 @@ class NetWork{
   Future<Response> post(url,{param}) async{
     return await _dio.post(url,data: param);
   }
+
+  static Future<bool> syncDatabase()async{
+    await NetWork.instance.get(NetWork.ALL_ORDER)
+        .then((res)async {
+      List jsonA = JSON.decode(res.data.toString());
+      for(int i = 0 ; i < jsonA.length;i++){
+        Order order =Order.fromJson(jsonA[i]['order']);
+        await database.addOrder(order);
+        List books = jsonA[i]['map'];
+        for(int j = 0; j < books.length; j ++){
+          OrderToBook orderToBook = OrderToBook.fromJson(books[j]);
+          await database.addOrderToBook(orderToBook);
+        }
+      }
+      return true;
+    });
+    return false;
+  }
+
+
 }
