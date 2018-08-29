@@ -25,13 +25,12 @@ class UnpackagedPageState extends State<UnpackagedPage>{
   ScrollController _scrollController = new ScrollController();
   bool isPerformingRequest = false;
   @override
-  void initState() {
+  initState() {
     super.initState();
-    print("init state");
-    _getMoreData();
+    loadOrder();
     _scrollController.addListener(() {
       if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
-        _getMoreData();
+//        _getMoreData();
       }
     });
   }
@@ -39,7 +38,7 @@ class UnpackagedPageState extends State<UnpackagedPage>{
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: _refresh,
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.white,
       child: Container(
         child: _list.length == 0 ? BlankView() : ListView.builder(
           itemBuilder: (context, index) {
@@ -56,8 +55,11 @@ class UnpackagedPageState extends State<UnpackagedPage>{
   }
 
   Future<Null> _refresh() async {
-    _list.clear();
-//    await _loadFirstListData();
+    setState(() {
+      _list.clear();
+    });
+    await NetWork.syncDatabase();
+    await loadOrder();
     return;
   }
 
@@ -66,11 +68,17 @@ class UnpackagedPageState extends State<UnpackagedPage>{
     _scrollController.dispose();
     super.dispose();
   }
+
+  loadOrder()async {
+    List<Map> mList = await db.selectUnpackOrder();
+    setState(() {
+      _list = OrderList.fromJson(mList).list;
+    });
+  }
+
   _getMoreData() async {
     if (!isPerformingRequest) {
       setState(() => isPerformingRequest = true);
-      List<Map> mList = await db.selectUnpackOrder();
-      _list = OrderList.fromJson(mList).list;
       setState(() {
         isPerformingRequest = false;
       });
@@ -85,16 +93,14 @@ class UnpackagedPageState extends State<UnpackagedPage>{
           var msg = JSON.decode(res.data.toString());
           print(msg);
           if(msg['msg'] == 'success'){
-            Scaffold.of(context).showSnackBar(
-                new SnackBar(content: new Text("确认装袋成功")));
             _list[index].packed = 1;
             await db.updateOrderPacked(_list[index]);
-            if(this.mounted){
-              setState(() {
-                _list.removeAt(index);
-                print('remove from list');
-              });
-            }
+            setState(() {
+              _list.removeAt(index);
+              print('remove from list');
+            });
+            Scaffold.of(context).showSnackBar(
+                new SnackBar(content: new Text("确认装袋成功")));
           }else{
             Scaffold.of(context).showSnackBar(
                 new SnackBar(content: new Text("确认装袋失败,请稍后再试")));

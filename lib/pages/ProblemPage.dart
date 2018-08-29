@@ -50,7 +50,9 @@ class ProblemPageState extends State<ProblemPage>{
   }
 
   Future<Null> _refresh() async {
-    _list.clear();
+    setState(() {
+      _list.clear();
+    });
     await getUnFinishOrder();
     await NetWork.syncDatabase();
     await loadOrders();

@@ -30,7 +30,6 @@ class UnpackageItemStage extends State<UnpackageItem>{
   void initState() {
     order = widget.order;
     database = widget.database;
-    print(order.id);
     loadBooksList().then((data){
       if(this.mounted){
         setState(() {
@@ -92,8 +91,6 @@ class UnpackageItemStage extends State<UnpackageItem>{
 
   launchTel()async{
     String url = 'tel:'+ order.phone;
-    print(url);
-    print(order.phone);
     if (await canLaunch(url)) {
       await launch(url);
     } else {

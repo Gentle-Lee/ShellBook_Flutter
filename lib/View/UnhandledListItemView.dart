@@ -23,8 +23,6 @@ class UnhandledListItemState extends State<UnhandledListItem>{
   CustomDatabase database;
   @override
   void initState() {
-    // TODO: implement initState
-    super.initState();
     this.order = widget.order;
     this.database = widget.database;
     loadBookList().then((data){
@@ -34,6 +32,8 @@ class UnhandledListItemState extends State<UnhandledListItem>{
         });
       }
     });
+    super.initState();
+
   }
   Future<List<OrderBook>> loadBookList()async{
     list = BookList.fromJson(await database.selectFromBookWithOrderId(order.id)).list;

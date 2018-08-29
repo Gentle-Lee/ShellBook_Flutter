@@ -45,12 +45,17 @@ class HeaderState extends State<Header>{
   Widget build(BuildContext context) {
     return ListTile(
       leading: FadeInImage.assetNetwork(
-        width: 30.0,
-        height: 30.0,
+        width: 40.0,
+        height: 40.0,
         placeholder: 'images/icon_shellbook.png',
         image: headimg,
       ),
-      title: new Text(order.nickname == null ? "null" : order.nickname),
+      title: Row(
+        children: <Widget>[
+          new Text(order.nickname == null ? "null" : order.nickname),
+          Text('('+order.dorm + order.room +')')
+        ],
+      ),
       subtitle: new Text(DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.parse(order.createDatetime))),
       trailing: new Text(status),
     );

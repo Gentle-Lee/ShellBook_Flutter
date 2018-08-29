@@ -26,7 +26,6 @@ class UnfinishPageState extends State<UnfinishPage> with SingleTickerProviderSta
   void initState() {
     super.initState();
     loadOrder();
-    getUnFinishOrder();
     _tabController = new TabController(vsync: this, length: 3);
     _tabController.addListener(loadOrder);
     _scrollController.addListener(() {

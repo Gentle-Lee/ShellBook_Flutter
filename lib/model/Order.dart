@@ -56,6 +56,7 @@ class Order{
     map['createDatetime'] = createDatetime;
     map['lack'] = lack;
     map['packed'] = packed;
+    map['phone'] = phone;
     return map;
   }
 
