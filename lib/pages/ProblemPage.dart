@@ -5,7 +5,8 @@ import '../model/Order.dart';
 import '../database/CustomDatabase.dart';
 import '../model/OrderList.dart';
 import '../View/BlankView.dart';
-
+import 'dart:convert';
+import 'package:shellbook_flutter/network.dart';
 class ProblemPage extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
@@ -22,10 +23,9 @@ class ProblemPageState extends State<ProblemPage>{
   @override
   void initState() {
     super.initState();
-    _getMoreData();
     _scrollController.addListener(() {
       if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
-        _getMoreData();
+//        _getMoreData();
       }
     });
   }
@@ -33,7 +33,7 @@ class ProblemPageState extends State<ProblemPage>{
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: _refresh,
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.white,
       child: Container(
         child: _list.length == 0 ? BlankView() : ListView.builder(
           itemBuilder: (context, index) {
@@ -51,8 +51,30 @@ class ProblemPageState extends State<ProblemPage>{
 
   Future<Null> _refresh() async {
     _list.clear();
-//    await _loadFirstListData();
+    await getUnFinishOrder();
+    await NetWork.syncDatabase();
+    await loadOrders();
     return;
+  }
+
+  getUnFinishOrder()async {
+    List list = await db.selectUnfinishedOrder();
+    List orderIdList = new List();
+    list.forEach((item)=>orderIdList.add({'id':item['id']}));
+    print(orderIdList);
+    print(JSON.encode(orderIdList));
+    var params = {
+      'orderList':orderIdList
+    };
+    print(params);
+    NetWork.instance.post(NetWork.SYNC_FINISHED_ORDER,data: params).then((res)async {
+      print(res.data.toString());
+      List jsonA = JSON.decode(res.data.toString());
+      for(int i = 0 ; i < jsonA.length;i++){
+        Order order =Order.fromJson(jsonA[i]);
+        await db.updateOrder(order);
+      }
+    });
   }
 
   @override
@@ -60,11 +82,13 @@ class ProblemPageState extends State<ProblemPage>{
     _scrollController.dispose();
     super.dispose();
   }
+  loadOrders()async {
+    List<Map> mList = await db.selectProblemOrder();
+    _list = OrderList.fromJson(mList).list;
+  }
   _getMoreData() async {
     if (!isPerformingRequest) {
       setState(() => isPerformingRequest = true);
-      List<Map> mList = await db.selectProblemOrder();
-      _list = OrderList.fromJson(mList).list;
       setState(() {
         isPerformingRequest = false;
       });

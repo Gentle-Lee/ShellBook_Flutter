@@ -72,7 +72,7 @@ class UnfinishPageState extends State<UnfinishPage> with SingleTickerProviderSta
   Widget unhandledPage(int deliveryMethod){
     return new RefreshIndicator(
         onRefresh: _refresh,
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.white,
         child: Container(
           child: _list.length == 0 ? BlankView() : ListView.builder(
             itemBuilder: (context, index) {
