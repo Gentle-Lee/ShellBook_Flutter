@@ -27,6 +27,7 @@ dev_dependencies:
   shared_preferences: ^0.4.2
   build_runner: ^0.7.6
   json_serializable: ^0.3.2
+  url_launcher: ^3.0.3
 
 
 

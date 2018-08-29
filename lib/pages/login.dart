@@ -82,7 +82,8 @@ class InputFieldState extends State<InputField>{
       if(response['msg'] == 'success'){
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setBool('Login', true);
-        Navigator.pushReplacementNamed(context, "/homePage");
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil('/homePage', (Route<dynamic> route) => false);
       }else{
         Scaffold.of(context).showSnackBar(
             new SnackBar(content: new Text("登录失败，用户名密码有误")));

@@ -7,6 +7,8 @@ import '../database/CustomDatabase.dart';
 import './BookListView.dart';
 import '../model/BookList.dart';
 import '../model/OrderBook.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 class UnpackageItem extends StatefulWidget{
   int index;
   Order order;
@@ -28,6 +30,7 @@ class UnpackageItemStage extends State<UnpackageItem>{
   void initState() {
     order = widget.order;
     database = widget.database;
+    print(order.id);
     loadBooksList().then((data){
       if(this.mounted){
         setState(() {
@@ -62,7 +65,7 @@ class UnpackageItemStage extends State<UnpackageItem>{
                       leading: Icon(Icons.phone),
                       title: Text('Contact'),
                     ),
-                    onPressed: () {},
+                    onPressed: launchTel,
                   ),
                   flex: 6,
                 ),
@@ -85,6 +88,18 @@ class UnpackageItemStage extends State<UnpackageItem>{
         ),
       ),
     );
+  }
+
+  launchTel()async{
+    String url = 'tel:'+ order.phone;
+    print(url);
+    print(order.phone);
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      Scaffold.of(context).showSnackBar(
+          new SnackBar(content: new Text("无法打开电话界面")));
+    }
   }
 
   pressConfirm(){

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../model/Order.dart';
 import 'package:shellbook_flutter/network.dart';
-
+import 'package:intl/intl.dart';
 class Header extends StatefulWidget{
   Header(this.order);
   final Order order;
@@ -51,7 +51,7 @@ class HeaderState extends State<Header>{
         image: headimg,
       ),
       title: new Text(order.nickname == null ? "null" : order.nickname),
-      subtitle: new Text(order.createDatetime),
+      subtitle: new Text(DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.parse(order.createDatetime))),
       trailing: new Text(status),
     );
   }

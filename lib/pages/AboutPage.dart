@@ -74,7 +74,11 @@ class AboutPageState extends State<AboutPage>{
                   'log out',
                 style: TextStyle(color: Colors.white),
               ),
-              color: Colors.blue, onPressed: () {},
+              color: Colors.blue,
+              onPressed: () {
+                Navigator.of(context)
+                    .pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
+              },
             )
           ],
         ),

@@ -23,13 +23,16 @@ class BookListView extends StatelessWidget{
                         flex: 2,
                       ),
                       Expanded(
-                        child: Column(
-                          children: <Widget>[
-                            Text(list[index].book.title),
-                            Text(list[index].book.author ),
-                            Text(list[index].book.edition ),
-                          ],
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: <Widget>[
+                              Text(list[index].book.title,style: new TextStyle(fontWeight: FontWeight.bold)),
+                              Text('作者:'+list[index].book.author ),
+                              Text('版本:'+list[index].book.edition ),
+                            ],
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                          ),
                         ),
                         flex: 6,
                       ),
