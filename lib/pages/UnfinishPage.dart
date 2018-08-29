@@ -4,7 +4,7 @@ import '../View/UnhandledListItemView.dart';
 import '../database/CustomDatabase.dart';
 import '../model/Order.dart';
 import '../model/OrderList.dart';
-
+import '../View/BlankView.dart';
 class UnfinishPage extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
@@ -13,63 +13,65 @@ class UnfinishPage extends StatefulWidget{
 
 }
 
-class UnfinishPageState extends State<UnfinishPage>{
+class UnfinishPageState extends State<UnfinishPage> with SingleTickerProviderStateMixin{
   List<Order> _list = List();
   CustomDatabase db = new CustomDatabase();
+  TabController _tabController;
   var curPage = 1;
   ScrollController _scrollController = new ScrollController();
   bool isPerformingRequest = false;
   @override
   void initState() {
     super.initState();
-    print("init state");
-    _getMoreData();
+    loadOrder();
+    _tabController = new TabController(vsync: this, length: 3);
+    _tabController.addListener(loadOrder);
     _scrollController.addListener(() {
       if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
-        _getMoreData();
+//        _getMoreData();
       }
     });
   }
   @override
   Widget build(BuildContext context) {
-    return  DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        appBar: AppBar(
-          title: TabBar(
-            tabs: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text("全部",style: new TextStyle(color: Colors.white)),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text("未配送",style: new TextStyle(color: Colors.white)),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text("未自取",style: new TextStyle(color: Colors.white)),
-              ),
-            ],
-          ),
-        ),
-        body: TabBarView(
-          children: [
-            unhandledPage(0),
-            unhandledPage(0),
-            unhandledPage(0),
+    return  Scaffold(
+      appBar: AppBar(
+        title: TabBar(
+          tabs: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text("全部",style: new TextStyle(color: Colors.white)),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text("未配送",style: new TextStyle(color: Colors.white)),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text("未自取",style: new TextStyle(color: Colors.white)),
+            ),
           ],
+          controller: _tabController,
         ),
+      ),
+      body: TabBarView(
+        physics: NeverScrollableScrollPhysics(),
+        children: [
+          unhandledPage(1),
+          unhandledPage(2),
+          unhandledPage(3),
+        ],
+        controller: _tabController,
       ),
     );
   }
 
-  Widget unhandledPage(int deliverySatus){
-    return RefreshIndicator(
+  Widget unhandledPage(int deliveryMethod){
+    return new RefreshIndicator(
         onRefresh: _refresh,
         backgroundColor: Colors.blue,
         child: Container(
-          child: ListView.builder(
+          child: _list.length == 0 ? BlankView() : ListView.builder(
             itemBuilder: (context, index) {
               if (index == _list.length) {
                 return _buildProgressIndicator();
@@ -91,6 +93,7 @@ class UnfinishPageState extends State<UnfinishPage>{
 
   @override
   void dispose() {
+    _tabController.dispose();
     _scrollController.dispose();
     super.dispose();
   }
@@ -101,6 +104,26 @@ class UnfinishPageState extends State<UnfinishPage>{
       _list = OrderList.fromJson(mList).list;
       setState(() {
         isPerformingRequest = false;
+      });
+    }
+  }
+  
+  loadOrder()async {
+    List<Map> mList;
+    switch((_tabController.index)){
+      case 0 :
+        mList = await db.selectUnfinishedOrder();
+        break;
+      case 1:
+        mList = await db.selectOrderByDeliveryMethod(0);
+        break;
+      case 2:
+        mList = await  db.selectOrderByDeliveryMethod(1);
+        break;
+    }
+    if(this.mounted){
+      setState(() {
+        _list =  OrderList.fromJson(mList).list;
       });
     }
   }

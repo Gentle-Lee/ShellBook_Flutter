@@ -161,9 +161,48 @@ class CustomDatabase{
 
   Future<List<Map>> selectFromBookWithOrderId(int id) async {
     var dbClient = await db;
-    List<Map> num = await dbClient.rawQuery('SELECT * FROM bk_book as A,bk_orderToBook as B where B.orderId = ? and A.id = B.bookId',[id]);
+    List<Map> num;
+    try{
+      num = await dbClient.rawQuery('SELECT * FROM bk_book as A,bk_orderToBook as B where B.orderId = ? and A.id = B.bookId',[id]);
+    }catch(e){
+      print(e);
+    }
     return num;
   }
+  Future<List<Map>> selectFromUnpackedBook(int id) async {
+    var dbClient = await db;
+    List<Map> num;
+    try{
+      num = await dbClient.rawQuery('SELECT * FROM bk_book as A,bk_orderToBook as B,bk_order as C where B.orderId = ? and A.id = B.bookId and C.id = B.orderId and C.packed = 0',[id]);
+    }catch(e){
+      print(e);
+    }
+    return num;
+  }
+
+  Future<List<Map>> selectOrderByDeliveryMethod(int deliveryMethod) async {
+    var dbClient = await db;
+    List<Map> num;
+    try{
+      num = await dbClient.rawQuery('SELECT * FROM bk_order where deliveryStatus = 0 and packed = 1 and deliveryMethod = ?',[deliveryMethod]);
+    }catch(e){
+      print(e);
+    }
+    return num;
+  }
+
+  Future<List<Map>> selectUnfinishedOrder() async {
+    var dbClient = await db;
+    List<Map> num;
+    try{
+      num = await dbClient.rawQuery('SELECT * FROM bk_order where deliveryStatus = 0 and packed = 1');
+    }catch(e){
+      print(e);
+    }
+    return num;
+  }
+
+
 
   Future closeDb() async {
     var dbClient = await db;

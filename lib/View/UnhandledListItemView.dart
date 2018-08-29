@@ -28,9 +28,11 @@ class UnhandledListItemState extends State<UnhandledListItem>{
     this.order = widget.order;
     this.database = widget.database;
     loadBookList().then((data){
-      setState(() {
-        list = data;
-      });
+      if(this.mounted){
+        setState(() {
+          list = data;
+        });
+      }
     });
   }
   Future<List<OrderBook>> loadBookList()async{

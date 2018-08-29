@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:shellbook_flutter/View/BlankView.dart';
 import '../View/Header.dart';
 import '../database/CustomDatabase.dart';
 import '../model/Order.dart';
@@ -37,7 +38,7 @@ class UnpackagedPageState extends State<UnpackagedPage>{
       onRefresh: _refresh,
       backgroundColor: Colors.blue,
       child: Container(
-        child: ListView.builder(
+        child: _list.length == 0 ? BlankView() : ListView.builder(
           itemBuilder: (context, index) {
             if (index == _list.length) {
               return _buildProgressIndicator();

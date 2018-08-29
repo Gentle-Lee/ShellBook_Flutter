@@ -30,13 +30,17 @@ class UnpackageItemStage extends State<UnpackageItem>{
       if(this.mounted){
         setState(() {
           bookList = data;
+          if(order.nickname != null && order.nickname.contains('泽鹏')){
+            print(order.id);
+            print(bookList);
+          }
         });
       }
     });
     super.initState();
   }
   Future<List<OrderBook>> loadBooksList()async {
-    List<OrderBook> list = BookList.fromJson(await database.selectFromBookWithOrderId(order.id)).list;
+    List<OrderBook> list = BookList.fromJson(await database.selectFromUnpackedBook(order.id)).list;
     return list;
   }
   @override

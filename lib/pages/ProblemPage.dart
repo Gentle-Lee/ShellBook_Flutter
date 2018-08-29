@@ -4,7 +4,7 @@ import '../View/ProblemListItem.dart';
 import '../model/Order.dart';
 import '../database/CustomDatabase.dart';
 import '../model/OrderList.dart';
-
+import '../View/BlankView.dart';
 
 class ProblemPage extends StatefulWidget{
   @override
@@ -22,7 +22,6 @@ class ProblemPageState extends State<ProblemPage>{
   @override
   void initState() {
     super.initState();
-    print("init state");
     _getMoreData();
     _scrollController.addListener(() {
       if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
@@ -36,7 +35,7 @@ class ProblemPageState extends State<ProblemPage>{
       onRefresh: _refresh,
       backgroundColor: Colors.blue,
       child: Container(
-        child: ListView.builder(
+        child: _list.length == 0 ? BlankView() : ListView.builder(
           itemBuilder: (context, index) {
             if (index == _list.length) {
               return _buildProgressIndicator();
@@ -64,7 +63,7 @@ class ProblemPageState extends State<ProblemPage>{
   _getMoreData() async {
     if (!isPerformingRequest) {
       setState(() => isPerformingRequest = true);
-      List<Map> mList = await db.selectFromOrder();
+      List<Map> mList = await db.selectProblemOrder();
       _list = OrderList.fromJson(mList).list;
       setState(() {
         isPerformingRequest = false;
