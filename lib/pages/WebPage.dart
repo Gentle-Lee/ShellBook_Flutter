@@ -15,7 +15,7 @@ class WebPageState extends State<WebPage>{
       appBar: new AppBar(
         title: new Text('自取码'),
       ),
-      url: "https://www.baidu.com/",
+      url: "http://m.beikebook.com/takeBookNum",
       withJavascript: true,
       withLocalStorage: true,
       withZoom: false,
