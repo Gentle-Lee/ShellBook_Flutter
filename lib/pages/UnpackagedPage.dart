@@ -76,17 +76,22 @@ class UnpackagedPageState extends State<UnpackagedPage>{
     }
   }
   confirmOrder(int orderId,int index){
-    NetWork.instance.post(NetWork.COMFIRM_ORDER,data:{'orderId':orderId} )
-        .then((res){
+    var params = {
+      'orderId':orderId
+    };
+    NetWork.instance.post(NetWork.COMFIRM_ORDER,data:params )
+        .then((res)async {
           var msg = JSON.decode(res.data.toString());
+          print(msg);
           if(msg['msg'] == 'success'){
             Scaffold.of(context).showSnackBar(
                 new SnackBar(content: new Text("确认装袋成功")));
+            _list[index].packed = 1;
+            await db.updateOrderPacked(_list[index]);
             if(this.mounted){
-              setState(() async {
-                _list[index].packed = 1;
-                await db.updateOrderPacked(_list[index]);
+              setState(() {
                 _list.removeAt(index);
+                print('remove from list');
               });
             }
           }else{
