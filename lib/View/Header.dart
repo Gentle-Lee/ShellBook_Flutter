@@ -51,7 +51,8 @@ class HeaderState extends State<Header>{
       title: Row(
         children: <Widget>[
           new Text(order.nickname == null ? "null" : order.nickname),
-          Text('('+order.dorm + order.room +')')
+          Text('('+order.dorm + order.room +')',
+              overflow: TextOverflow.ellipsis,)
         ],
       ),
       subtitle: new Text(DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.parse(order.createDatetime))),

@@ -15,6 +15,7 @@ dependencies:
   sqflite: any
   http: ^0.11.3+16
   dio: ^1.0.1
+  connectivity: ^0.3.1
 
 
 
@@ -46,6 +47,7 @@ flutter:
     - images/login_bg.png
     - images/user_background.jpg
     - images/icon_shellbook.png
+    - images/defaultBook.gif
     - assets/main.db
 
   # To add assets to your application, add an assets section, like this:
