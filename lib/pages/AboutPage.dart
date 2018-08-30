@@ -86,12 +86,9 @@ class AboutPageState extends State<AboutPage>{
                 setState(() {
                   loading = false;
                 });
-                updateBookDatabase().then((flag){
-                  if(flag){
-                    setState(() {
-                      loading = true;
-                    });
-                  }
+                await updateBookDatabase();
+                setState(() {
+                  loading = true;
                 });
               },
             ),
