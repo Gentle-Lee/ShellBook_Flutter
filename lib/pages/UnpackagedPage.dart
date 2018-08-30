@@ -22,6 +22,7 @@ class UnpackagedPageState extends State<UnpackagedPage>{
   List<Order> _list = List();
   CustomDatabase db = new CustomDatabase();
   var curPage = 1;
+  bool flag = true;
   ScrollController _scrollController = new ScrollController();
   bool isPerformingRequest = false;
   @override
@@ -60,8 +61,16 @@ class UnpackagedPageState extends State<UnpackagedPage>{
     setState(() {
       _list.clear();
     });
-    await NetWork.syncDatabase();
-    await loadOrder();
+    if(flag){
+      await NetWork.syncDatabase();
+      await loadOrder();
+    }else{
+      await loadOrder();
+      setState(() {
+        flag = true;
+      });
+    }
+
     return;
   }
 
@@ -91,11 +100,14 @@ class UnpackagedPageState extends State<UnpackagedPage>{
       });
     }
   }
-  confirmOrder(int orderId,int index){
+  confirmOrder(int orderId,int index)async {
+    setState(() {
+      flag = false;
+    });
     var params = {
       'orderId':orderId
     };
-    NetWork.instance.post(NetWork.COMFIRM_ORDER,data:params )
+    await NetWork.instance.post(NetWork.COMFIRM_ORDER,data:params )
         .then((res)async {
           var msg = JSON.decode(res.data.toString());
           print(msg);
@@ -105,6 +117,7 @@ class UnpackagedPageState extends State<UnpackagedPage>{
             setState(() {
               _list.removeAt(index);
               print('remove from list');
+              _refresh();
             });
             Scaffold.of(context).showSnackBar(
                 new SnackBar(content: new Text("确认装袋成功")));
