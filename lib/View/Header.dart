@@ -55,7 +55,7 @@ class HeaderState extends State<Header>{
               overflow: TextOverflow.ellipsis,)
         ],
       ),
-      subtitle: new Text(DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.parse(order.createDatetime))),
+      subtitle: new Text(order.createDatetime),
       trailing: new Text(status),
     );
   }

@@ -20,7 +20,7 @@ class PlainBookList extends StatelessWidget{
                       flex: 8,
                     ),
                     Expanded(
-                      child: Text(list[index].amount.toString() + '本'),
+                      child: Center(child: Text(list[index].amount.toString() + '本')),
                       flex: 2,
                     ),
                   ]
