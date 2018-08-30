@@ -63,7 +63,7 @@ class CustomDatabase{
     var dbClient = await db;
     try {
       int res = await dbClient.insert("bk_orderToBook", orderToBook.toJson());
-//      print("orderToBook added $res");
+      print("orderToBook added $res");
       return res;
     } catch (e) {
       int res = await updateOrderToBook(orderToBook);
@@ -72,10 +72,10 @@ class CustomDatabase{
   }
 
   Future<int> updateOrderToBook(OrderToBook orderToBook) async {
+    print(orderToBook.id);
     var dbClient = await db;
     int res = await dbClient.update("bk_orderToBook", orderToBook.toJson(),
         where: "id = ?", whereArgs: [orderToBook.id]);
-//    print("orderToBook updated $res");
     return res;
   }
 
@@ -163,7 +163,7 @@ class CustomDatabase{
     var dbClient = await db;
     List<Map> num;
     try{
-      num = await dbClient.rawQuery('SELECT * FROM bk_book as A,bk_orderToBook as B where B.orderId = ? and A.id = B.bookId',[id]);
+      num = await dbClient.rawQuery('SELECT A.id,A.title,A.author,A.press,A.cover,A.edition,A.originalPrice,A.sellingPrice,B.amount FROM bk_book as A,bk_orderToBook as B where A.id = B.bookId and B.orderId = ?',[id]);
     }catch(e){
       print(e);
     }
@@ -173,7 +173,7 @@ class CustomDatabase{
     var dbClient = await db;
     List<Map> num;
     try{
-      num = await dbClient.rawQuery('SELECT * FROM bk_book as A,bk_orderToBook as B,bk_order as C where B.orderId = ? and A.id = B.bookId and C.id = B.orderId and C.packed = 0',[id]);
+      num = await dbClient.rawQuery('SELECT * FROM bk_book as A,bk_orderToBook as B where B.orderId = ? and A.id = B.bookId',[id]);
     }catch(e){
       print(e);
     }

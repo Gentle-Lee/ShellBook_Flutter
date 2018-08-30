@@ -45,7 +45,9 @@ class UnpackagedPageState extends State<UnpackagedPage>{
             if (index == _list.length) {
               return _buildProgressIndicator();
             }
-            return UnpackageItem(index,_list[index],db,confirmfunc: confirmOrder,);
+            return Container(
+                child: UnpackageItem(index,_list[index],db,confirmfunc: confirmOrder)
+            );
           },
           itemCount: _list == null ? 0 : _list.length,
           controller: _scrollController,
@@ -61,6 +63,11 @@ class UnpackagedPageState extends State<UnpackagedPage>{
     await NetWork.syncDatabase();
     await loadOrder();
     return;
+  }
+
+  @override
+  void didUpdateWidget(UnpackagedPage oldWidget) {
+    super.didUpdateWidget(oldWidget);
   }
 
   @override

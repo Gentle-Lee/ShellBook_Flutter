@@ -118,7 +118,6 @@ class UnfinishPageState extends State<UnfinishPage> with SingleTickerProviderSta
     List list = await db.selectUnfinishedOrder();
     List orderIdList = new List();
     list.forEach((item)=>orderIdList.add({'id':item['id']}));
-    print(orderIdList);
     print(JSON.encode(orderIdList));
     var params = {
       'orderList':orderIdList
