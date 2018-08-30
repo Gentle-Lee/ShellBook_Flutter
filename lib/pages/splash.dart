@@ -63,7 +63,7 @@ class SplashState extends State<SplashPage> {
   Future<bool> syncDatabase()async{
     await NetWork.instance.get(NetWork.ALL_ORDER)
         .then((res)async {
-          List jsonA = JSON.decode(res.data.toString());
+          List jsonA = const JsonCodec().decode(res.data.toString());
           for(int i = 0 ; i < jsonA.length;i++){
             Order order =Order.fromJson(jsonA[i]['order']);
             await database.addOrder(order);

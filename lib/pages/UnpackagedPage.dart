@@ -109,7 +109,7 @@ class UnpackagedPageState extends State<UnpackagedPage>{
     };
     await NetWork.instance.post(NetWork.COMFIRM_ORDER,data:params )
         .then((res)async {
-          var msg = JSON.decode(res.data.toString());
+          var msg = const JsonCodec().decode(res.data.toString());
           print(msg);
           if(msg['msg'] == 'success'){
             _list[index].packed = 1;

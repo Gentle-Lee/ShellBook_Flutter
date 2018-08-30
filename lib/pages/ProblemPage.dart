@@ -64,14 +64,14 @@ class ProblemPageState extends State<ProblemPage>{
     List orderIdList = new List();
     list.forEach((item)=>orderIdList.add({'id':item['id']}));
     print(orderIdList);
-    print(JSON.encode(orderIdList));
+    print(const JsonCodec().encode(orderIdList));
     var params = {
       'orderList':orderIdList
     };
     print(params);
     NetWork.instance.post(NetWork.SYNC_FINISHED_ORDER,data: params).then((res)async {
       print(res.data.toString());
-      List jsonA = JSON.decode(res.data.toString());
+      List jsonA = const JsonCodec().decode(res.data.toString());
       for(int i = 0 ; i < jsonA.length;i++){
         Order order =Order.fromJson(jsonA[i]);
         await db.updateOrder(order);

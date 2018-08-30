@@ -117,7 +117,7 @@ class SearchPageState extends State<SearchPage>{
     }
     NetWork.getRes(NetWork.SEARCH_ORDER+ _controller.text)
         .then((res){
-          List jsonList = JSON.decode(res.data.toString());
+          List jsonList = const JsonCodec().decode(res.data.toString());
           print(jsonList);
           if(this.mounted){
             setState(() {

@@ -78,7 +78,7 @@ class InputFieldState extends State<InputField>{
     print(params);
     NetWork.instance.post(NetWork.LOGIN,data: params)
     .then((res)async {
-      var response = JSON.decode(res.data.toString());
+      var response = const JsonCodec().decode(res.data.toString());
       if(response['msg'] == 'success'){
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setBool('Login', true);
