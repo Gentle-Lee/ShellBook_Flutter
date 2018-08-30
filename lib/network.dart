@@ -19,8 +19,6 @@ class NetWork{
   static Options options = new Options(
     baseUrl:BASE_URL,
     contentType:  ContentType.parse("application/x-www-form-urlencoded"),
-    connectTimeout:5000,
-    receiveTimeout:3000
   );
   static Dio get instance {
     if(_dio!=null){
@@ -43,6 +41,7 @@ class NetWork{
     await NetWork.instance.get(NetWork.ALL_ORDER)
         .then((res)async {
       List jsonA = JSON.decode(res.data.toString());
+      print(jsonA);
       for(int i = 0 ; i < jsonA.length;i++){
         Order order =Order.fromJson(jsonA[i]['order']);
         await database.addOrder(order);

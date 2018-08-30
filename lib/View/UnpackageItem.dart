@@ -68,7 +68,7 @@ class UnpackageItemStage extends State<UnpackageItem>{
                   child: FlatButton(
                     child: ListTile(
                       leading: Icon(Icons.phone),
-                      title: Text('缺书联系'),
+                      title: Text(order.phone),
                     ),
                     onPressed: launchTel,
                   ),
