@@ -68,7 +68,7 @@ class UnpackageItemStage extends State<UnpackageItem>{
                   child: FlatButton(
                     child: ListTile(
                       leading: Icon(Icons.phone),
-                      title: Text('Contact'),
+                      title: Text('缺书联系'),
                     ),
                     onPressed: launchTel,
                   ),
@@ -80,7 +80,7 @@ class UnpackageItemStage extends State<UnpackageItem>{
                     child: MaterialButton(
                       color: Colors.blue,
                       textColor: Colors.white,
-                      child: new Text("finish",style: new TextStyle(color: Colors.white),),
+                      child: new Text("成功装袋",style: new TextStyle(color: Colors.white),),
                       onPressed: pressConfirm,
                     ),
                   ),
