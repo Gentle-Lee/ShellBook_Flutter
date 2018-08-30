@@ -1,5 +1,9 @@
+import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/material.dart';
-
+import '../model/Book.dart';
+import '../database/CustomDatabase.dart';
+import '../network.dart';
 class AboutPage extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
@@ -8,7 +12,8 @@ class AboutPage extends StatefulWidget{
 }
 
 class AboutPageState extends State<AboutPage>{
-
+  final CustomDatabase database = new CustomDatabase();
+  bool loading = true;
   Widget _buildHeader(){
     return Stack(
       children: <Widget>[
@@ -70,6 +75,29 @@ class AboutPageState extends State<AboutPage>{
             MaterialButton(
               minWidth: 300.0,
               height: 40.0,
+              child: !loading ? new CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),)
+                  :Text(
+                '更新书籍',
+                style: TextStyle(color: Colors.white),
+              ),
+              color: Colors.blue,
+              onPressed: () async{
+                print('press');
+                setState(() {
+                  loading = false;
+                });
+                updateBookDatabase().then((flag){
+                  if(flag){
+                    setState(() {
+                      loading = true;
+                    });
+                  }
+                });
+              },
+            ),
+            MaterialButton(
+              minWidth: 300.0,
+              height: 40.0,
               child: Text(
                   'log out',
                 style: TextStyle(color: Colors.white),
@@ -86,6 +114,17 @@ class AboutPageState extends State<AboutPage>{
       ),
     );
 
+  }
+
+  Future<bool> updateBookDatabase()async {
+    List list =await database.selectMaxTimeFromBook();
+    await NetWork.instance.post(NetWork.UPDATE_BOOK_DATABASE,data:list[0])
+    .then((res){
+      List jsonList = const JsonCodec().decode(res.data.toString());
+      jsonList.forEach ((item)async=>await database.addBook(Book.fromJson(item)));
+      return true;
+    });
+    return false;
   }
 
 }

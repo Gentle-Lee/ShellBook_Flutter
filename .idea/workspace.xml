@@ -6,13 +6,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d68c96c0-8eab-4c35-93e4-84600a405d36" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/android/gradle.properties" afterPath="$PROJECT_DIR$/android/gradle.properties" />
-      <change beforePath="$PROJECT_DIR$/lib/model/Book.dart" afterPath="$PROJECT_DIR$/lib/model/Book.dart" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" afterPath="$PROJECT_DIR$/pubspec.lock" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" afterPath="$PROJECT_DIR$/pubspec.yaml" />
+      <change beforePath="$PROJECT_DIR$/lib/database/CustomDatabase.dart" afterPath="$PROJECT_DIR$/lib/database/CustomDatabase.dart" />
+      <change beforePath="$PROJECT_DIR$/lib/network.dart" afterPath="$PROJECT_DIR$/lib/network.dart" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/AboutPage.dart" afterPath="$PROJECT_DIR$/lib/pages/AboutPage.dart" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/splash.dart" afterPath="$PROJECT_DIR$/lib/pages/splash.dart" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -30,21 +27,22 @@
       <file leaf-file-name="AboutPage.dart" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/pages/AboutPage.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1910">
-              <caret line="88" column="3" lean-forward="false" selection-start-line="88" selection-start-column="3" selection-end-line="88" selection-end-column="3" />
+            <state relative-caret-position="168">
+              <caret line="123" column="55" lean-forward="false" selection-start-line="123" selection-start-column="55" selection-end-line="123" selection-end-column="55" />
               <folding>
-                <marker date="1535641280539" expanded="true" signature="7:8" ph="..." />
-                <marker date="1535641280539" expanded="true" signature="2362:2366" ph="{...}" />
+                <element signature="e#0#20#0" expanded="true" />
+                <marker date="1535644988307" expanded="true" signature="51:52" ph="..." />
+                <marker date="1535644988307" expanded="true" signature="3344:3348" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Book.dart" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/model/Book.dart">
+      <file leaf-file-name="CustomDatabase.dart" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/database/CustomDatabase.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="638">
-              <caret line="36" column="8" lean-forward="false" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="8" />
+            <state relative-caret-position="172">
+              <caret line="106" column="9" lean-forward="false" selection-start-line="106" selection-start-column="9" selection-end-line="106" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -60,11 +58,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CustomDatabase.dart" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/database/CustomDatabase.dart">
+      <file leaf-file-name="splash.dart" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/pages/splash.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
-              <caret line="214" column="0" lean-forward="false" selection-start-line="214" selection-start-column="0" selection-end-line="214" selection-end-column="0" />
+            <state relative-caret-position="-898">
+              <caret line="36" column="13" lean-forward="false" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -151,9 +149,7 @@
         <option value="$PROJECT_DIR$/lib/model/SearchOrder.dart" />
         <option value="$PROJECT_DIR$/lib/View/SearchPalnBookListView.dart" />
         <option value="$PROJECT_DIR$/lib/pages/home.dart" />
-        <option value="$PROJECT_DIR$/lib/pages/AboutPage.dart" />
         <option value="$PROJECT_DIR$/lib/model/Order.dart" />
-        <option value="$PROJECT_DIR$/lib/database/CustomDatabase.dart" />
         <option value="$PROJECT_DIR$/lib/View/UnhandledListItemView.dart" />
         <option value="$PROJECT_DIR$/lib/main.dart" />
         <option value="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" />
@@ -161,17 +157,19 @@
         <option value="$PROJECT_DIR$/lib/View/BookListView.dart" />
         <option value="$PROJECT_DIR$/lib/View/Header.dart" />
         <option value="$PROJECT_DIR$/lib/View/PlainBookListVIew.dart" />
-        <option value="$PROJECT_DIR$/lib/network.dart" />
         <option value="$PROJECT_DIR$/lib/pages/UnfinishPage.dart" />
         <option value="$PROJECT_DIR$/lib/pages/login.dart" />
         <option value="$PROJECT_DIR$/lib/pages/ProblemPage.dart" />
         <option value="$PROJECT_DIR$/lib/pages/SearchPage.dart" />
-        <option value="$PROJECT_DIR$/lib/pages/splash.dart" />
         <option value="$PROJECT_DIR$/lib/pages/UnpackagedPage.dart" />
         <option value="$PROJECT_DIR$/pubspec.yaml" />
         <option value="$PROJECT_DIR$/android/app/build.gradle" />
         <option value="$PROJECT_DIR$/android/gradle.properties" />
         <option value="$PROJECT_DIR$/lib/model/Book.dart" />
+        <option value="$PROJECT_DIR$/lib/network.dart" />
+        <option value="$PROJECT_DIR$/lib/pages/splash.dart" />
+        <option value="$PROJECT_DIR$/lib/pages/AboutPage.dart" />
+        <option value="$PROJECT_DIR$/lib/database/CustomDatabase.dart" />
       </list>
     </option>
   </component>
@@ -209,13 +207,7 @@
             <path>
               <item name="shellbook_flutter" type="b2602c69:ProjectViewProjectNode" />
               <item name="shellbook_flutter" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shellbook_flutter" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shellbook_flutter" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="shellbook_flutter" type="b2602c69:ProjectViewProjectNode" />
@@ -278,7 +270,7 @@
     <property name="show.migrate.to.gradle.popup" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="android.profiler.active" value="true" />
-    <property name="SearchEverywhereHistoryKey" value="header&#9;FILE&#9;file://C:/Users/LENOVO/Desktop/shellbook_flutter/shellbook_flutter/lib/View/Header.dart&#10;plain&#9;FILE&#9;file://C:/Users/LENOVO/Desktop/shellbook_flutter/shellbook_flutter/lib/View/PlainBookListVIew.dart&#10;bookList&#9;FILE&#9;file://C:/Users/LENOVO/Desktop/shellbook_flutter/shellbook_flutter/lib/View/BookListView.dart&#10;booklie&#9;FILE&#9;file://C:/Users/LENOVO/Desktop/shellbook_flutter/shellbook_flutter/lib/View/PlainBookListVIew.dart&#10;login&#9;FILE&#9;file://C:/Users/LENOVO/Desktop/shellbook_flutter/shellbook_flutter/lib/pages/login.dart&#10;un&#9;FILE&#9;file://C:/Users/LENOVO/Desktop/shellbook_flutter/shellbook_flutter/lib/View/UnpackageItem.dart&#10;spla&#9;FILE&#9;file://C:/Users/LENOVO/Desktop/shellbook_flutter/shellbook_flutter/lib/pages/splash.dart" />
+    <property name="SearchEverywhereHistoryKey" value="splas&#9;FILE&#9;file://C:/Users/LENOVO/Desktop/shellbook_flutter/shellbook_flutter/lib/pages/splash.dart&#10;splaa&#9;FILE&#9;file://C:/Users/LENOVO/AppData/Local/Android/Sdk/sources/android-25/android/view/DisplayAdjustments.java&#10;login&#9;FILE&#9;file://C:/Users/LENOVO/Desktop/shellbook_flutter/shellbook_flutter/lib/pages/login.dart&#10;header&#9;FILE&#9;file://C:/Users/LENOVO/Desktop/shellbook_flutter/shellbook_flutter/lib/View/Header.dart&#10;plain&#9;FILE&#9;file://C:/Users/LENOVO/Desktop/shellbook_flutter/shellbook_flutter/lib/View/PlainBookListVIew.dart&#10;bookList&#9;FILE&#9;file://C:/Users/LENOVO/Desktop/shellbook_flutter/shellbook_flutter/lib/View/BookListView.dart&#10;booklie&#9;FILE&#9;file://C:/Users/LENOVO/Desktop/shellbook_flutter/shellbook_flutter/lib/View/PlainBookListVIew.dart&#10;un&#9;FILE&#9;file://C:/Users/LENOVO/Desktop/shellbook_flutter/shellbook_flutter/lib/View/UnpackageItem.dart&#10;spla&#9;FILE&#9;file://C:/Users/LENOVO/Desktop/shellbook_flutter/shellbook_flutter/lib/pages/splash.dart" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
@@ -433,7 +425,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.42209303" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -456,7 +447,8 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32906976" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7255814" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21199143" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21199143" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32906976" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Flutter Inspector" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19325481" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -487,7 +479,6 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3372093" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21199143" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32906976" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Flutter Inspector" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19325481" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -510,13 +501,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lib/View/package_item_widget.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="2" column="48" lean-forward="true" selection-start-line="2" selection-start-column="48" selection-end-line="2" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/View/nested_list_widget.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
@@ -764,34 +748,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/pages/UnpackagedPage.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="111" column="36" lean-forward="false" selection-start-line="111" selection-start-column="36" selection-end-line="111" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/pages/splash.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="67" column="59" lean-forward="false" selection-start-line="67" selection-start-column="59" selection-end-line="67" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pubspec.yaml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="82">
           <caret line="25" column="23" lean-forward="false" selection-start-line="25" selection-start-column="23" selection-end-line="25" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/pages/login.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="80" column="38" lean-forward="false" selection-start-line="80" selection-start-column="38" selection-end-line="80" selection-end-column="38" />
           <folding />
         </state>
       </provider>
@@ -809,16 +769,6 @@
         <state relative-caret-position="48">
           <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/network.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="42" column="19" lean-forward="false" selection-start-line="42" selection-start-column="19" selection-end-line="42" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#20#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -846,29 +796,72 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/database/CustomDatabase.dart">
+    <entry file="file://$PROJECT_DIR$/lib/model/Book.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="214" column="0" lean-forward="false" selection-start-line="214" selection-start-column="0" selection-end-line="214" selection-end-column="0" />
+        <state relative-caret-position="360">
+          <caret line="15" column="18" lean-forward="true" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/pages/login.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-744">
+          <caret line="80" column="42" lean-forward="false" selection-start-line="80" selection-start-column="41" selection-end-line="80" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-25/android/view/DisplayAdjustments.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#2970#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/network.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="15" column="72" lean-forward="false" selection-start-line="15" selection-start-column="72" selection-end-line="15" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/pages/UnpackagedPage.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24">
+          <caret line="111" column="36" lean-forward="false" selection-start-line="111" selection-start-column="36" selection-end-line="111" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/pages/splash.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-898">
+          <caret line="36" column="13" lean-forward="false" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/pages/AboutPage.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1910">
-          <caret line="88" column="3" lean-forward="false" selection-start-line="88" selection-start-column="3" selection-end-line="88" selection-end-column="3" />
+        <state relative-caret-position="168">
+          <caret line="123" column="55" lean-forward="false" selection-start-line="123" selection-start-column="55" selection-end-line="123" selection-end-column="55" />
           <folding>
-            <marker date="1535641280539" expanded="true" signature="7:8" ph="..." />
-            <marker date="1535641280539" expanded="true" signature="2362:2366" ph="{...}" />
+            <element signature="e#0#20#0" expanded="true" />
+            <marker date="1535644988307" expanded="true" signature="51:52" ph="..." />
+            <marker date="1535644988307" expanded="true" signature="3344:3348" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/model/Book.dart">
+    <entry file="file://$PROJECT_DIR$/lib/database/CustomDatabase.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="638">
-          <caret line="36" column="8" lean-forward="false" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="8" />
+        <state relative-caret-position="172">
+          <caret line="106" column="9" lean-forward="false" selection-start-line="106" selection-start-column="9" selection-end-line="106" selection-end-column="9" />
           <folding />
         </state>
       </provider>

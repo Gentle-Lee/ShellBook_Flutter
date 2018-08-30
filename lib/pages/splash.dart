@@ -32,9 +32,9 @@ class SplashState extends State<SplashPage> {
       return login;
     }).then((login){
       print(login);
-      checkInternetStatus().then((connected){
+      checkInternetStatus().then((connected)async {
         if(connected){
-          syncDatabase().then((data){
+          await syncDatabase().then((data){
             return 1;
           });
         }else{

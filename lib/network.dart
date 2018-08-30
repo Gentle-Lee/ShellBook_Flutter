@@ -14,6 +14,7 @@ class NetWork{
   static const String USER_URL_PREFIX = 'http://m.beikebook.com';
   static const String IMAGE_URL_PREFIX = 'http://beikebook.com';
   static const String SYNC_FINISHED_ORDER = BASE_URL + '/syncFinishedOrder';
+  static const String UPDATE_BOOK_DATABASE = BASE_URL + '/updateBookDataBase';
   static final CustomDatabase database = new CustomDatabase();
   static Dio _dio;
   static Options options = new Options(

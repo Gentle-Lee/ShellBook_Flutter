@@ -106,7 +106,7 @@ class CustomDatabase{
     var dbClient = await db;
     try {
       int res = await dbClient.insert("bk_book", book.toJson());
-//      print(res);
+      print(res);
       return res;
     } catch (e) {
       int res = await updateBook(book);
@@ -229,7 +229,7 @@ class CustomDatabase{
     var dbClient = await db;
     List<Map> num;
     try{
-      num = await dbClient.rawQuery('SELECT max(createDatetime) FROM bk_book');
+      num = await dbClient.rawQuery('SELECT max(createDatetime) as maxCreateTime  FROM bk_book');
     }catch(e){
       print(e);
     }
