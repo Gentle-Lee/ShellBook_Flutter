@@ -35,11 +35,13 @@ class SearchPageState extends State<SearchPage>{
           ),
           new Expanded(
             child: new TextField(
+              style: new TextStyle(color: Colors.white),
               autofocus: true,
               decoration: new InputDecoration.collapsed(
                   hintText: "输入手机号码/宿舍/微信名",
                   hintStyle: new TextStyle(color: Colors.white)
               ),
+
               controller: _controller,
             ),
           ),

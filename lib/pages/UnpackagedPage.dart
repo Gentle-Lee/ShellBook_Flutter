@@ -113,10 +113,10 @@ class UnpackagedPageState extends State<UnpackagedPage>{
           print(msg);
           if(msg['msg'] == 'success'){
             _list[index].packed = 1;
-            await db.updateOrderPacked(_list[index]);
+            db.updateOrderPacked(_list[index]);
             setState(() {
+              print( _list[index].id.toString() + 'remove from list');
               _list.removeAt(index);
-              print('remove from list');
               _refresh();
             });
             Scaffold.of(context).showSnackBar(
