@@ -225,6 +225,16 @@ class CustomDatabase{
     return res;
   }
 
+  Future<List<Map>> selectMaxTimeFromBook() async {
+    var dbClient = await db;
+    List<Map> num;
+    try{
+      num = await dbClient.rawQuery('SELECT max(createDatetime) FROM bk_book');
+    }catch(e){
+      print(e);
+    }
+    return num;
+  }
 
 
 
