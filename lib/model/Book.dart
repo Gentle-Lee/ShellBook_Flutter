@@ -8,11 +8,16 @@ class Book{
     this.press,
     this.edition,
     this.originalPrice,
-    this.sellingPrice
+    this.sellingPrice,
+    this.compressedCover,
+    this.indexCover,
+    this.keyword,
+    this.createDatetime,
+    this.indexDesc
   });
 
   int id;
-  String isbn,cover,title,author,press,edition;
+  String isbn,cover,title,author,press,edition,compressedCover,indexCover,indexDesc,createDatetime,keyword;
   double originalPrice,sellingPrice;
 
   Book.fromJson(Map json)
@@ -24,7 +29,12 @@ class Book{
         press = json['press'],
         edition = json['edition'],
         originalPrice = json['originalPrice'].toDouble(),
-        sellingPrice = json['sellingPrice'].toDouble();
+        sellingPrice = json['sellingPrice'].toDouble(),
+        compressedCover = json['compressedCover'],
+        indexCover = json['indexCover'],
+        keyword = json['keyword'],
+        createDatetime = json['createDatetime'],
+        indexDesc = json['indexDesc'];
 
   Map<String, dynamic> toJson() {
     var map = Map<String, dynamic>();
@@ -37,6 +47,11 @@ class Book{
     map['edition'] = edition;
     map['originalPrice'] = originalPrice;
     map['sellingPrice'] = sellingPrice;
+    map['compressedCover'] = compressedCover;
+    map['indexCover'] = indexCover;
+    map['keyword'] = keyword;
+    map['createDatetime'] = createDatetime;
+    map['indexDesc'] = indexDesc;
     return map;
   }
 }

@@ -23,6 +23,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_webview_plugin: ^0.2.0
+  path_provider: ^0.4.1
   shared_preferences: ^0.4.2
   build_runner: ^0.9.1
   url_launcher: ^3.0.3
