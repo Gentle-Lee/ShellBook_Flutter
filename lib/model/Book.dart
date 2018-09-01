@@ -13,11 +13,12 @@ class Book{
     this.indexCover,
     this.keyword,
     this.createDatetime,
-    this.indexDesc
+    this.indexDesc,
+    this.updateDatetime
   });
 
   int id;
-  String isbn,cover,title,author,press,edition,compressedCover,indexCover,indexDesc,createDatetime,keyword;
+  String isbn,cover,title,author,press,edition,compressedCover,indexCover,indexDesc,createDatetime,keyword,updateDatetime;
   double originalPrice,sellingPrice;
 
   Book.fromJson(Map json)
@@ -25,16 +26,17 @@ class Book{
         isbn = json['isbn'],
         cover = json['cover'],
         title = json['title'],
-        author = json['author'],
-        press = json['press'],
-        edition = json['edition'],
+        author = json['author'] == null ? '无' : json['author'],
+        press = json['press'] == null ? '无' : json['press'],
+        edition = json['edition'] == null ? '无' : json['edition'],
         originalPrice = json['originalPrice'].toDouble(),
         sellingPrice = json['sellingPrice'].toDouble(),
         compressedCover = json['compressedCover'],
         indexCover = json['indexCover'],
         keyword = json['keyword'],
         createDatetime = json['createDatetime'],
-        indexDesc = json['indexDesc'];
+        indexDesc = json['indexDesc'],
+        updateDatetime = json['updateDatetime'];
 
   Map<String, dynamic> toJson() {
     var map = Map<String, dynamic>();
@@ -52,6 +54,7 @@ class Book{
     map['keyword'] = keyword;
     map['createDatetime'] = createDatetime;
     map['indexDesc'] = indexDesc;
+    map['updateDatetime'] = updateDatetime;
     return map;
   }
 }

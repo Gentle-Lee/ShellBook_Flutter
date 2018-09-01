@@ -135,7 +135,7 @@ class UnfinishPageState extends State<UnfinishPage> with SingleTickerProviderSta
   
   loadOrder()async {
     List<Map> mList;
-    switch((_tabController.index)){
+    switch((_tabController == null ? 0 : _tabController.index)){
       case 0 :
         mList = await db.selectUnfinishedOrder();
         break;

@@ -4,6 +4,7 @@ import 'package:shellbook_flutter/network.dart';
 class BookListView extends StatelessWidget{
   List<OrderBook> list;
   BookListView(this.list);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -28,16 +29,13 @@ class BookListView extends StatelessWidget{
                         flex: 2,
                       ),
                       Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: <Widget>[
-                              Text(list[index].book.title,style: new TextStyle(fontWeight: FontWeight.bold)),
-                              Text('作者:'+list[index].book.author ),
-                              Text('版本:'+list[index].book.edition ),
-                            ],
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                          ),
+                        child: Column(
+                          children: <Widget>[
+                            Text(list[index].book.title,style: new TextStyle(fontWeight: FontWeight.bold)),
+                            Text('作者:' + list[index].book.author),
+                            Text('版本' + list[index].book.edition),
+                          ],
+                          crossAxisAlignment: CrossAxisAlignment.start,
                         ),
                         flex: 6,
                       ),
